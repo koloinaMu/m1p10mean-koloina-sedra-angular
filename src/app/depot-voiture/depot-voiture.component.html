@@ -1,0 +1,41 @@
+<div class="panel-header panel-header-sm">
+</div>
+<div class="main-content" >
+  <div class="card col-md-6 form-card"  >
+    <div class="card-header">
+      <h5 class="title">Déposer ma voiture</h5>
+    </div>
+    <div class="card-body">
+      <form (ngSubmit)=deposer() >
+        <div class="row" >
+          <div class="col-md-6 pr-1">
+            <div class="form-group">
+              <label for="email">Immatriculation</label>
+              <input name="immatriculation" id="email" type="text" class="form-control" [(ngModel)]="voiture.immatriculation" placeholder="Immatriculation" value="voiture.immatriculation" >
+            </div>
+          </div>
+        </div>
+        <div class="row" >
+          <div class="col-md-6 pr-1">
+            <div class="form-group">
+              <label for="email">Couleur</label>
+              <select class="form-control" [(ngModel)]="voiture.couleur" >
+                <option
+                    *ngFor="let option of options; index as i"
+                    [selected]="option === voiture.couleur" 
+                >
+                    {{ option }}
+                </option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="row" >
+          <div class="col-md-6 pr-1" >
+            <button type="submit" class="btn btn-light">Déposer ma voiture</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

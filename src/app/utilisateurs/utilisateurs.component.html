@@ -1,0 +1,89 @@
+<div class="panel-header panel-header-sm">
+</div>
+<div class="main-content">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="card-title"> Liste des utilisateurs</h4>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table">
+              <thead class=" text-primary">
+                <th>
+                  Nom
+                </th>
+                <th>
+                  Prénom
+                </th>
+                <th>
+                  E-Mail
+                </th>
+                <th>
+                  Type
+                </th>
+                <th class="text-right">
+                  Option
+                </th>
+              </thead>
+              <tbody>              	
+                <tr *ngFor="let utilisateur of utilisateurs" >
+                	<td> {{ utilisateur.nom }} </td>
+                	<td> {{ utilisateur.prenom }} </td>
+                	<td> {{ utilisateur.mail }} </td>
+                	<td><div *ngIf="utilisateur.type==0 else elseBlock" > Client</div> </td>
+                		<ng-template #elseBlock >Responsable atelier</ng-template>                	
+                	<td class="text-right" >                		
+	                	<!-- Modal -->
+	                	<div *ngIf="utilisateur.etat==0" >
+	                	<ng-template class="modal" #message let-modal style="z-index: 1055;" >
+	                		<div id="modalModif" >
+	<div class="modal-header">
+		<h4 class="modal-title" id="modal-basic-title">Modifier type</h4>
+		<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+	</div>
+	<div class="modal-body">
+		<form>
+			<div class="row" >
+		        <div class="col-md-6 pr-1">
+		          <div class="form-group">
+		            <label for="email">Email : </label>
+		            <label> {{ utilisateur.mail }} </label>
+		          </div>
+		        </div>
+		    </div>
+		    <div class="row" >
+		        <div class="col-md-6 pr-1">
+		          <div class="form-group">
+		            <label for="email">Type</label>
+		            <input name="type" id="email" type="number" class="form-control" [(ngModel)]="utilModif.type" placeholder="Type" min="0" max="2" value="utilisateur.type"  >
+		          </div>
+		        </div>
+		    </div>
+		    <div class="row" >
+		        <div class="col-md-6 pr-1">
+		          <div class="form-group">
+		            <button type="button" class="btn btn-outline-dark" (click)="modifier(utilisateur)">Modifier</button>
+		          </div>
+		        </div>
+		    </div>
+		</form>
+	</div>
+	</div>
+</ng-template>
+
+<button class="btn btn-lg btn-outline-primary" (click)="open(message,utilisateur.mail,utilisateur.type)">Modifier type</button>
+
+</div>
+
+                	</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,43 @@
+<div class="card col-md-4 form-card" style="background-color: #20c997;" >
+  <div class="card-header">
+    <h5 class="title">Connexion</h5>
+  </div>
+  <div class="card-body">
+    <form (ngSubmit)=connecter() >
+      <div class="row" >
+        <div class="col-md-6 pr-1">
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input name="email" id="email" type="email" class="form-control" [(ngModel)]="utilisateur.mail" placeholder="Email">
+          </div>
+        </div>
+      </div>
+      <div class="row" >
+        <div class="col-md-6 pr-1">
+          <div class="form-group">
+            <label for="email">Mot de passe</label>
+            <input name="mdp" id="email" type="password" class="form-control" [(ngModel)]="utilisateur.mdp" placeholder="Mot de passe">
+          </div>
+        </div>
+      </div>
+      <div class="row" >
+        <div class="col-md-6 pr-1">
+          <a href="/connexion/1" >
+            Se connecter en tant <div *ngIf="type==1 else elseBlock" >qu'utilisateur</div>
+            <ng-template #elseBlock>que super administrateur</ng-template>
+          </a>          
+        </div>
+        <div class="col-md-6 pr-1">
+          <a href="/inscription" >
+            S'inscrire
+          </a>          
+        </div>
+      </div>
+      <div class="row" >
+        <div class="col-md-6 pr-1" >
+          <button type="submit" class="btn btn-light">Se connecter</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,155 @@
+<div class="panel-header panel-header-sm">
+</div>
+<div class="main-content">
+  <div class="row">
+    <div class="card col-md-12 form-card " >
+      <div class="card-header">
+        <h5 class="title">Rechercher</h5>
+      </div>
+      <div class="card-body">
+        <form (ngSubmit)=rechercher() >
+          <div class="row" >
+            <div class="col-md-6 pr-1">
+              <div class="form-group">
+                <label for="email">Immatriculation</label>
+                <input name="immatriculation" id="email" type="text" class="form-control" [(ngModel)]="voiture.immatriculation" placeholder="Immatriculation" >
+              </div>
+            </div>
+          </div>
+          <div class="row" >
+            <div class="col-md-6 pr-1">
+              <div class="form-group">
+                <label for="email">Couleur</label>
+                <select class="form-control" [(ngModel)]="voiture.couleur" >
+                  <option
+                      *ngFor="let option of options" 
+                  >
+                      {{ option }}
+                  </option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="row" >
+            <div class="col-md-6 pr-1" >
+              <button type="submit" class="btn btn-light">Rechercher</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="card-title"> Résultat de la recherche</h4>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table">
+              <thead class=" text-primary">
+                <th>
+                  Immatriculation
+                </th>
+                <th>
+                  Couleur
+                </th>
+                <th>
+                  Date de dépot
+                </th>
+                <th>
+                  Date de réception
+                </th>
+                <th>
+                  Date de sortie
+                </th>
+                <th>
+                  Réparations
+                </th>
+                <th>
+                  Options
+                </th>
+              </thead>
+              <tbody>              	
+                <tr *ngFor="let depot of depots" >
+                	<td> {{ depot.voiture.immatriculation }} </td>
+                	<td> {{ depot.voiture.couleur }} </td>
+                	<td> {{ depot.dateDepot }} </td>
+                	<td> {{ depot.dateReception }} </td>
+                	<td> {{ depot.dateSortie }} </td>
+                  <td> 
+                    <ng-template class="modal" #message let-modal style="z-index: 1055;" >
+                      <div id="modalModif" >
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Les réparations</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+    
+    <div class="table-responsive">
+            <table class="table">
+              <thead class=" text-primary">
+                <th>
+                  Nom
+                </th>
+                <th>
+                  Prix
+                </th>
+              </thead>
+              <tbody>               
+                <tr *ngFor="let reparation of depot.reparations" >
+                  <td> {{ reparation.nom }} </td>
+                  <td class="text-right" > {{ reparation.prix | number }} </td>                 
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+
+  </div>
+  </div>
+</ng-template>
+<button class="btn btn-lg" (click)="openReparations(message)">Réparations</button>
+
+                  </td>                                  
+                	<td> 
+                    <div *ngIf="type==2 && depot.dateSortie==null" >
+                    <ng-template class="modal" #message let-modal style="z-index: 1055;" >
+                      <div id="modalModif" >
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Valider bon de sortie</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="row" >
+            <div class="col-md-6 pr-1">
+              <div class="form-group">
+                <label for="email">Voiture : </label>
+                <label> {{ depot.voiture.immatriculation }} </label>
+              </div>
+            </div>
+        </div>
+        <div class="row" >
+            <div class="col-md-6 pr-1">
+              <div class="form-group">
+                <button type="button" class="btn btn-outline-dark" (click)="sortie(depot)">Valider sortie</button>
+              </div>
+            </div>
+        </div>
+    </form>
+  </div>
+  </div>
+</ng-template>
+<button class="btn btn-lg btn-outline-primary" (click)="open(message)">Sortie</button>
+
+                  </div>
+                  </td>                                	
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
