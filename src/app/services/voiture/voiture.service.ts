@@ -30,4 +30,9 @@ export class VoitureService {
     return this.http.post(baseUrl+'sortieVoiture',aPropos,{responseType:'json'});
   }
 
+  depotVoitureJour() {
+   // console.log(utilisateur);
+    return this.http.get(baseUrl+'depotVoitureJour',{responseType:'json'});
+  }
+
 }

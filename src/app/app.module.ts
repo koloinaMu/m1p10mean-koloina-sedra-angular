@@ -5,6 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrModule } from 'ngx-toastr';
+import { ChartsModule } from 'ng2-charts';
 
 import { AppRoutingModule } from './app.routing';
 import { ComponentsModule } from './components/components.module';
@@ -19,12 +20,14 @@ import { UtilisateursComponent } from './utilisateurs/utilisateurs.component';
 import { DepotVoitureComponent } from './depot-voiture/depot-voiture.component';
 import { ReparationsCourantesComponent } from './reparations-courantes/reparations-courantes.component';
 import { RechercheComponent } from './recherche/recherche.component';
+import { StatistiqueComponent } from './statistique/statistique.component';
 //import { UtilisateurService } from './services/utilisateur/utilisateur.service';
 
 @NgModule({
   imports: [
     BrowserAnimationsModule,
     FormsModule,
+    ChartsModule,
     HttpClientModule,
     ComponentsModule,
     RouterModule,
@@ -41,7 +44,8 @@ import { RechercheComponent } from './recherche/recherche.component';
     UtilisateursComponent,
     DepotVoitureComponent,
     ReparationsCourantesComponent,
-    RechercheComponent
+    RechercheComponent,
+    StatistiqueComponent
 
   ],
   providers: [

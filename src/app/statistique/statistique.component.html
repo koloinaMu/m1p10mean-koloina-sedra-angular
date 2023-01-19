@@ -1,0 +1,28 @@
+<div class="panel-header panel-header-lg">
+	<div class="row" >
+		<div class="col-md-1" ></div>
+		<div class="col-md-3" >
+			<button class="btn btn-light" (click)="openCanvas()" >Ouvrir chart</button>
+		</div>		
+	</div>	
+	<div class="row" *ngIf="dataAvailable==false" style="color:#fff;" >
+		<div class="col-md-1" ></div>
+	    <div class="stats" >
+	    	<i class="now-ui-icons loader_refresh spin"></i> Chargement
+	    </div>
+	</div>
+	<div id="divChart" style="display:none;height:200px;" >
+		<canvas  baseChart id="bigDashboardChart"
+                [datasets]="lineBigDashboardChartData"
+                [labels]="lineBigDashboardChartLabels"
+                 [colors]="lineBigDashboardChartColors"
+                [options]="lineBigDashboardChartOptions"
+                [chartType]="lineBigDashboardChartType"
+                (chartHover)="chartHovered($event)"
+                (chartClick)="chartClicked($event)">                	
+        </canvas>
+	</div> 
+</div>
+<div class="main-content"> 	
+  	
+</div>
