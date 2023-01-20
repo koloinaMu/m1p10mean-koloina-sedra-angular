@@ -25,7 +25,7 @@ export class ReparationsCourantesComponent implements OnInit {
     this.user=JSON.parse(localStorage.getItem("utilisateur"));
     this.voitureService.getReparationsCourantesUtilisateur(this.user).subscribe(
       (response: any) =>{
-       console.log(response); 
+       //console.log(response); 
        this.depots=response; 
       },
       (error: HttpErrorResponse) => {
@@ -39,6 +39,15 @@ export class ReparationsCourantesComponent implements OnInit {
       { ariaLabelledBy: 'modal-basic-title',windowClass: 'modif' }); 
     //modalRef.componentInstance.utilModif.mail=mail;
     //modalRef.componentInstance.utilModif.type=type;
+  }
+
+  montantTotal(tableau){
+    var somme=0;
+   // console.log(tableau);
+    for(var i=0;i<tableau.length;i++){
+      somme+=(tableau[i].prix);
+    }
+    return somme;
   }
 
 }

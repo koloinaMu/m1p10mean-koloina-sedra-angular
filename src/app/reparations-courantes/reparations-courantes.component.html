@@ -52,7 +52,7 @@
                 <th>
                   Nom
                 </th>
-                <th>
+                <th class="text-right" >
                   Prix
                 </th>
               </thead>
@@ -60,6 +60,10 @@
                 <tr *ngFor="let reparation of depot.reparations" >
                   <td> {{ reparation.nom }} </td>
                   <td class="text-right" > {{ reparation.prix | number }} </td>                 
+                </tr>
+                <tr>
+                  <td></td>
+                  <td class="text-right" > {{ montantTotal(depot.reparations) | number }} </td>
                 </tr>
               </tbody>
             </table>
