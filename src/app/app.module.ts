@@ -19,6 +19,8 @@ import { UtilisateursComponent } from './utilisateurs/utilisateurs.component';
 import { DepotVoitureComponent } from './depot-voiture/depot-voiture.component';
 import { ReparationsCourantesComponent } from './reparations-courantes/reparations-courantes.component';
 import { RechercheComponent } from './recherche/recherche.component';
+import { ListeFactureComponent } from './liste-facture/liste-facture/liste-facture.component';
+import { ReceptionComponent } from './reception-vehicule/reception/reception.component';
 //import { UtilisateurService } from './services/utilisateur/utilisateur.service';
 
 @NgModule({
@@ -41,8 +43,9 @@ import { RechercheComponent } from './recherche/recherche.component';
     UtilisateursComponent,
     DepotVoitureComponent,
     ReparationsCourantesComponent,
-    RechercheComponent
-
+    RechercheComponent,
+    ListeFactureComponent,
+    ReceptionComponent
   ],
   providers: [
     //UtilisateurService

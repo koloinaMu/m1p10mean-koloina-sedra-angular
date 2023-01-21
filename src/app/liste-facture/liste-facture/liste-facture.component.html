@@ -5,7 +5,7 @@
     <div class="col-md-12">
       <div class="card">
         <div class="card-header">
-          <h4 class="card-title"> Liste de mes réparations en cours</h4>
+          <h4 class="card-title"> Listes de vos vehicules</h4>
         </div>
         <div class="card-body">
           <div class="table-responsive">
@@ -17,32 +17,24 @@
                 <th>
                   Couleur
                 </th>
+
                 <th>
-                  Date de dépot
-                </th>
-                <th>
-                  Date de réception
-                </th>
-                <th>
-                  Date de sortie
-                </th>
-                <th>
-                  Réparations
+                  facture
                 </th>
               </thead>
               <tbody>
-                <tr *ngFor="let depot of depots" >
+                <tr *ngFor="let depot of depots ">
                 	<td> {{ depot.voiture.immatriculation }} </td>
                 	<td> {{ depot.voiture.couleur }} </td>
-                	<td> {{ depot.dateDepot | date:"dd/MM/yyyy HH:mm:ss" }} </td>
-                	<td> {{ depot.dateReception | date:"dd/MM/yyyy HH:mm:ss" }} </td>
-                	<td> {{ depot.dateSortie | date:"dd/MM/yyyy HH:mm:ss" }} </td>
                 	<td>
                     <ng-template class="modal" #message let-modal style="z-index: 1055;" >
                       <div id="modalModif" >
-  <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">Les réparations</h4>
-    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+
+      <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">les Factures </h4>
+
+    <h4 class="modal-title" class="text-right" id="modal-basic-title">{{ depot.dateFacture| date:"dd/MM/yyyy" }}</h4>
+    <button type="button" class="btn-close"  aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
   </div>
 
   <div class="modal-body">
@@ -51,17 +43,26 @@
             <table class="table">
               <thead class=" text-primary">
                 <th>
-                  Nom
+                  immatriculation
                 </th>
                 <th>
-                  Prix
+                  reparation
                 </th>
+                <th>
+                  montant
+                </th>
+
               </thead>
               <tbody>
-                <tr *ngFor="let reparation of depot.reparations" >
-                  <td> {{ reparation.nom }} </td>
-                  <td class="text-right" > {{ reparation.prix | number }} </td>
+
+                <tr *ngFor="let data of depot.reparation ">
+
+                  <td> {{ depot.voiture.immatriculation }} </td>
+                  <td> {{ data.nom }} </td>
+                  <td> {{ data.prix | number }} </td>
+
                 </tr>
+
               </tbody>
             </table>
           </div>
@@ -70,9 +71,9 @@
   </div>
   </div>
 </ng-template>
-<button class="btn btn-lg btn-outline-primary" (click)="open(message)">Réparations</button>
+<button class="btn btn-lg btn-outline-primary" (click)="open(message)">voir Facture</button>
                   </td>
-                </tr>
+
               </tbody>
             </table>
           </div>

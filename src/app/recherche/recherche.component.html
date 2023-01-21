@@ -76,41 +76,7 @@
                 	<td> {{ depot.dateDepot }} </td>
                 	<td> {{ depot.dateReception }} </td>
                 	<td> {{ depot.dateSortie }} </td>
-                  <td> 
-                    <ng-template class="modal" #message let-modal style="z-index: 1055;" >
-                      <div id="modalModif" >
-  <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">Les réparations</h4>
-    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
-  </div>
-  <div class="modal-body">
-    
-    <div class="table-responsive">
-            <table class="table">
-              <thead class=" text-primary">
-                <th>
-                  Nom
-                </th>
-                <th>
-                  Prix
-                </th>
-              </thead>
-              <tbody>               
-                <tr *ngFor="let reparation of depot.reparations" >
-                  <td> {{ reparation.nom }} </td>
-                  <td class="text-right" > {{ reparation.prix | number }} </td>                 
-                </tr>
-              </tbody>
-            </table>
-          </div>
-
-
-  </div>
-  </div>
-</ng-template>
-<button class="btn btn-lg" (click)="openReparations(message)">Réparations</button>
-
-                  </td>                                  
+                  <td> {{ depot.reparations }} </td>                                  
                 	<td> 
                     <div *ngIf="type==2 && depot.dateSortie==null" >
                     <ng-template class="modal" #message let-modal style="z-index: 1055;" >

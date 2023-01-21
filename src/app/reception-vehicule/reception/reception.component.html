@@ -1,0 +1,45 @@
+
+<div class="panel-header panel-header-sm">
+</div>
+<div class="main-content">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="card-title"> Liste des vehicules déposés</h4>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table">
+              <thead class=" text-primary">
+                <th>
+                  Immatriculation
+                </th>
+                <th>
+                  Couleur
+                </th>
+                <th>
+                  Date de dépot
+                </th>
+                <th>
+                  Réparations
+                </th>
+              </thead>
+              <tbody>
+                <tr *ngFor="let depot of depots" >
+                	<td> {{ depot.voiture.immatriculation }} </td>
+                	<td> {{ depot.voiture.couleur }} </td>
+                	<td> {{ depot.dateDepot | date:"dd/MM/yyyy HH:mm:ss" }} </td>
+
+                	<td>
+                      <button class="btn btn-lg btn-outline-primary" (click)="receptionner(depot._id)">Ajouter au garage</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

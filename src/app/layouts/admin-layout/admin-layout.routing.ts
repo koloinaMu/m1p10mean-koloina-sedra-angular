@@ -12,9 +12,12 @@ import { IconsComponent } from '../../icons/icons.component';
 import { MapsComponent } from '../../maps/maps.component';
 import { NotificationsComponent } from '../../notifications/notifications.component';
 import { UpgradeComponent } from '../../upgrade/upgrade.component';
+import { ListeFactureComponent } from '../../liste-facture/liste-facture/liste-facture.component';
+import { ReceptionComponent } from '../../reception-vehicule/reception/reception.component';
 
 export const AdminLayoutRoutes: Routes = [
     { path: 'utilisateurs',      component: UtilisateursComponent },
+    { path: 'facture',      component: ListeFactureComponent },
     { path: 'depot-voiture',      component: DepotVoitureComponent },
     { path: 'reparations-courantes',      component: ReparationsCourantesComponent },
     { path: 'recherche',      component: RechercheComponent },
@@ -25,5 +28,6 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'icons',          component: IconsComponent },
     { path: 'maps',           component: MapsComponent },
     { path: 'notifications',  component: NotificationsComponent },
-    { path: 'upgrade',        component: UpgradeComponent }
+    { path: 'upgrade',        component: UpgradeComponent },
+    { path: 'reception',        component: ReceptionComponent },
 ];
