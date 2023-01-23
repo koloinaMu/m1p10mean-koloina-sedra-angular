@@ -35,4 +35,18 @@ export class VoitureService {
     return this.http.get(baseUrl+'depotVoitureJour',{responseType:'json'});
   }
 
+  paiement(aPropos) {
+   // console.log(utilisateur);
+    return this.http.post(baseUrl+'paiement',aPropos,{responseType:'json'});
+  }
+
+  getDepotNonRegle() {
+   // console.log(utilisateur);
+    return this.http.get(baseUrl+'factures-non-reglees',{responseType:'json'});
+  }
+
+  validerPaiement(aPropos) {
+   // console.log(utilisateur);
+    return this.http.post(baseUrl+'validerPaiement',aPropos,{responseType:'json'});
+  }
 }

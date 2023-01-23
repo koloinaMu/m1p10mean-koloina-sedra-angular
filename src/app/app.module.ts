@@ -21,6 +21,8 @@ import { DepotVoitureComponent } from './depot-voiture/depot-voiture.component';
 import { ReparationsCourantesComponent } from './reparations-courantes/reparations-courantes.component';
 import { RechercheComponent } from './recherche/recherche.component';
 import { StatistiqueComponent } from './statistique/statistique.component';
+import { MesFacturesComponent } from './mes-factures/mes-factures.component';
+import { PaiementNonValideComponent } from './paiement-non-valide/paiement-non-valide.component';
 //import { UtilisateurService } from './services/utilisateur/utilisateur.service';
 
 @NgModule({
@@ -45,7 +47,9 @@ import { StatistiqueComponent } from './statistique/statistique.component';
     DepotVoitureComponent,
     ReparationsCourantesComponent,
     RechercheComponent,
-    StatistiqueComponent
+    StatistiqueComponent,
+    MesFacturesComponent,
+    PaiementNonValideComponent
 
   ],
   providers: [

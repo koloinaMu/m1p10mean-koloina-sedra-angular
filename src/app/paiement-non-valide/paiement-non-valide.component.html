@@ -1,0 +1,92 @@
+<div class="panel-header panel-header-sm">
+</div>
+<div class="main-content">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="card-title"> Liste des paiements non validés</h4>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table">
+              <thead class=" text-primary">
+                <th>
+                  Immatriculation
+                </th>
+                <th>
+                  Couleur
+                </th>
+                <th>
+                  Date de dépot
+                </th>
+                <th>
+                  Date de réception
+                </th>
+                <th>
+                  Date de sortie
+                </th>
+                <th>
+                  Paiements
+                </th>
+              </thead>
+              <tbody>              	
+                <tr *ngFor="let depot of depots" >
+                	<td> {{ depot.voiture.immatriculation }} </td>
+                	<td> {{ depot.voiture.couleur }} </td>
+                	<td> {{ depot.dateDepot | date:"dd/MM/yyyy HH:mm:ss" }} </td>
+                	<td> {{ depot.dateReception | date:"dd/MM/yyyy HH:mm:ss" }} </td>
+                	<td> {{ depot.dateSortie | date:"dd/MM/yyyy HH:mm:ss" }} </td>
+                	<td> 
+                    <ng-template class="modal" #message let-modal style="z-index: 1055;" >
+                      <div id="modalModif" >
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Les paiements</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+    
+    <div class="table-responsive">
+            <table class="table">
+              <thead class=" text-primary">
+                <th>
+                  Date
+                </th>
+                <th class="text-right" >
+                  Prix (Ar)
+                </th>
+                <th >
+                  Option
+                </th>
+              </thead>
+              <tbody>               
+                <tr *ngFor="let paiement of depot.paiements" [style.background-color]="paiement.couleur" >
+                  <td> {{ paiement.datePaiement | date:"dd/MM/yyyy HH:mm:ss" }} </td>
+                  <td class="text-right" > {{ paiement.montant | number }} </td>
+                  <td *ngIf="paiement.etat==0" >
+                  	<button class="btn btn-lg btn-outline-primary" (click)="validerPaiement(depot._id,paiement)" >Valider</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>Montant payé</strong></td>
+                  <td class="text-right" > {{ montantPaye(depot.paiements) | number }} Ar</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+
+  </div>
+  </div>
+</ng-template>
+<button class="btn btn-lg btn-outline-primary" (click)="open(message)">Paiement</button>
+                  </td>                                	
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

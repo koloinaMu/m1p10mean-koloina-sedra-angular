@@ -5,6 +5,8 @@ import { DepotVoitureComponent } from '../../depot-voiture/depot-voiture.compone
 import { ReparationsCourantesComponent } from '../../reparations-courantes/reparations-courantes.component';
 import { RechercheComponent } from '../../recherche/recherche.component';
 import { StatistiqueComponent } from '../../statistique/statistique.component';
+import { MesFacturesComponent } from '../../mes-factures/mes-factures.component';
+import { PaiementNonValideComponent } from '../../paiement-non-valide/paiement-non-valide.component';
 import { DashboardComponent } from '../../dashboard/dashboard.component';
 import { UserProfileComponent } from '../../user-profile/user-profile.component';
 import { TableListComponent } from '../../table-list/table-list.component';
@@ -20,6 +22,8 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'reparations-courantes',      component: ReparationsCourantesComponent },
     { path: 'recherche',      component: RechercheComponent },
     { path: 'statistique',      component: StatistiqueComponent },
+    { path: 'mes-factures',      component: MesFacturesComponent },
+    { path: 'paiement-non-valide',      component: PaiementNonValideComponent },
     { path: 'dashboard',      component: DashboardComponent },
     { path: 'user-profile',   component: UserProfileComponent },
     { path: 'table-list',     component: TableListComponent },
