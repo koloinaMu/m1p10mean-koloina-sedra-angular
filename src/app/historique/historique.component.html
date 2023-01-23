@@ -1,4 +1,3 @@
-
 <div class="panel-header panel-header-sm">
 </div>
 <div class="main-content">
@@ -6,7 +5,7 @@
     <div class="col-md-12">
       <div class="card">
         <div class="card-header">
-          <h4 class="card-title"> Liste des vehicules déposés</h4>
+          <h4 class="card-title"> Liste de mes réparations en cours</h4>
         </div>
         <div class="card-body">
           <div class="table-responsive">
@@ -22,7 +21,16 @@
                   Date de dépot
                 </th>
                 <th>
+                  Date de réception
+                </th>
+                <th>
+                  Date de sortie
+                </th>
+                <th>
                   Réparations
+                </th>
+                <th>
+                  Récuperation
                 </th>
               </thead>
               <tbody>
@@ -30,9 +38,9 @@
                 	<td> {{ depot.voiture.immatriculation }} </td>
                 	<td> {{ depot.voiture.couleur }} </td>
                 	<td> {{ depot.dateDepot | date:"dd/MM/yyyy HH:mm:ss" }} </td>
-
-                  <td>
-
+                	<td> {{ depot.dateReception | date:"dd/MM/yyyy HH:mm:ss" }} </td>
+                	<td> {{ depot.dateSortie | date:"dd/MM/yyyy HH:mm:ss" }} </td>
+                	<td>
                     <ng-template class="modal" #message let-modal style="z-index: 1055;" >
                       <div id="modalModif" >
   <div class="modal-header">
@@ -51,12 +59,15 @@
                 <th>
                   Prix (Ar)
                 </th>
+                <th>
+                  avancement (%)
+                </th>
               </thead>
               <tbody>
-                <tr *ngFor="let data of depot.reparation" >
+                <tr *ngFor="let data of depot.reparation">
                   <td> {{ data.nom }} </td>
                   <td> {{ data.prix | number }} </td>
-
+                  <td> {{ data.avancement | number }} </td>
                 </tr>
               </tbody>
             </table>
@@ -66,12 +77,11 @@
   </div>
   </div>
 </ng-template>
-<button class="btn btn-lg btn-outline-primary" (click)="open(message)">les reparations </button>
-
+<button class="btn btn-lg btn-outline-primary" (click)="open(message)">Facture</button>
                   </td>
 
                   <td>
-                    <button class="btn btn-lg btn-outline-primary" (click)="receptionner(depot._id)">Ajouter au garage</button>
+                    <button class="btn btn-lg btn-outline-primary" (click)="recuperer_voiture(depot._id)">recuperer</button>
                   </td>
 
                 </tr>

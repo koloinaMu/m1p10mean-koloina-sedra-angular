@@ -15,6 +15,7 @@ import { UpgradeComponent } from '../../upgrade/upgrade.component';
 import { ListeFactureComponent } from '../../liste-facture/liste-facture/liste-facture.component';
 import { ReceptionComponent } from '../../reception-vehicule/reception/reception.component';
 import { AtelierComponent } from '../../atelier/atelier.component';
+import { HistoriqueComponent } from '../../historique/historique.component';
 
 export const AdminLayoutRoutes: Routes = [
     { path: 'utilisateurs',      component: UtilisateursComponent },
@@ -32,4 +33,6 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'upgrade',        component: UpgradeComponent },
     { path: 'reception',        component: ReceptionComponent },
     { path: 'dans-atelier',        component: AtelierComponent },
+    { path: 'historique',        component: HistoriqueComponent },
+
 ];

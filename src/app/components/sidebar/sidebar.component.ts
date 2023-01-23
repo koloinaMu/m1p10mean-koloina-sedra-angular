@@ -28,9 +28,9 @@ export const routesSuperAdmin: RouteInfo[] = [
 export const routesClient: RouteInfo[] = [
     { path: '/depot-voiture', title: 'Déposer ma voiture',  icon: 'ui-2_settings-90', class: '' },
     { path: '/reparations-courantes', title: 'Mes réparations',  icon: 'ui-2_settings-90', class: '' },
-    { path: '/facture', title: 'Mes factures',  icon: 'users_single-02', class: '' },
     { path: '/reception', title: 'Reception Vehicule',  icon: 'ui-2_settings-90', class: '' },
-    { path: '/dans-atelier', title: 'Atelier',  icon: 'ui-2_settings-90', class: '' }
+    { path: '/dans-atelier', title: 'Atelier',  icon: 'ui-2_settings-90', class: '' },
+    { path: '/historique', title: 'Historique',  icon: 'users_single-02', class: '' }
 ];
 
 export const routesAtelier: RouteInfo[] = [

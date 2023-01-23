@@ -22,6 +22,7 @@ import { RechercheComponent } from './recherche/recherche.component';
 import { ListeFactureComponent } from './liste-facture/liste-facture/liste-facture.component';
 import { ReceptionComponent } from './reception-vehicule/reception/reception.component';
 import { AtelierComponent } from './atelier/atelier.component';
+import { HistoriqueComponent } from './historique/historique.component';
 //import { UtilisateurService } from './services/utilisateur/utilisateur.service';
 
 @NgModule({
@@ -47,7 +48,8 @@ import { AtelierComponent } from './atelier/atelier.component';
     RechercheComponent,
     ListeFactureComponent,
     ReceptionComponent,
-    AtelierComponent
+    AtelierComponent,
+    HistoriqueComponent
   ],
   providers: [
     //UtilisateurService
