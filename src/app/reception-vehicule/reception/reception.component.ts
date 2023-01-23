@@ -28,6 +28,7 @@ export class ReceptionComponent implements OnInit {
        (response: any) =>{
           console.log("REUSSI");
           console.log(response);
+          alert('insertion dans le garage  reussi')
         //this.router.navigate(['/utilisateurs']);
        },
        (error: HttpErrorResponse) => {

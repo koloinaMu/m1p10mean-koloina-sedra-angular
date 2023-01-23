@@ -21,6 +21,7 @@ import { ReparationsCourantesComponent } from './reparations-courantes/reparatio
 import { RechercheComponent } from './recherche/recherche.component';
 import { ListeFactureComponent } from './liste-facture/liste-facture/liste-facture.component';
 import { ReceptionComponent } from './reception-vehicule/reception/reception.component';
+import { AtelierComponent } from './atelier/atelier.component';
 //import { UtilisateurService } from './services/utilisateur/utilisateur.service';
 
 @NgModule({
@@ -45,7 +46,8 @@ import { ReceptionComponent } from './reception-vehicule/reception/reception.com
     ReparationsCourantesComponent,
     RechercheComponent,
     ListeFactureComponent,
-    ReceptionComponent
+    ReceptionComponent,
+    AtelierComponent
   ],
   providers: [
     //UtilisateurService
