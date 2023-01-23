@@ -30,9 +30,9 @@ export class VoitureService {
     return this.http.post(baseUrl+'sortieVoiture',aPropos,{responseType:'json'});
   }
 
-  depotVoitureJour() {
+  depotVoitureJour(option) {
    // console.log(utilisateur);
-    return this.http.get(baseUrl+'depotVoitureJour',{responseType:'json'});
+    return this.http.post(baseUrl+'chiffreAffaire',option,{responseType:'json'});
   }
 
   paiement(aPropos) {
@@ -48,5 +48,9 @@ export class VoitureService {
   validerPaiement(aPropos) {
    // console.log(utilisateur);
     return this.http.post(baseUrl+'validerPaiement',aPropos,{responseType:'json'});
+  }
+
+  tmpsReparationsMoyens(){
+    return this.http.get(baseUrl+'tmpsReparationsMoyens',{responseType:'json'});
   }
 }

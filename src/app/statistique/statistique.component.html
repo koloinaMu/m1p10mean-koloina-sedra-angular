@@ -1,28 +1,83 @@
-<div class="panel-header panel-header-lg">
+<div class="panel-header panel-header-sm">
 	<div class="row" >
 		<div class="col-md-1" ></div>
 		<div class="col-md-3" >
-			<button class="btn btn-light" (click)="openCanvas()" >Ouvrir chart</button>
+			
 		</div>		
-	</div>	
-	<div class="row" *ngIf="dataAvailable==false" style="color:#fff;" >
-		<div class="col-md-1" ></div>
-	    <div class="stats" >
-	    	<i class="now-ui-icons loader_refresh spin"></i> Chargement
-	    </div>
-	</div>
-	<div id="divChart" style="display:none;height:200px;" >
-		<canvas  baseChart id="bigDashboardChart"
-                [datasets]="lineBigDashboardChartData"
-                [labels]="lineBigDashboardChartLabels"
-                 [colors]="lineBigDashboardChartColors"
-                [options]="lineBigDashboardChartOptions"
-                [chartType]="lineBigDashboardChartType"
-                (chartHover)="chartHovered($event)"
-                (chartClick)="chartClicked($event)">                	
-        </canvas>
-	</div> 
+	</div>		
 </div>
 <div class="main-content"> 	
-  	
+	<div class="row" >
+		<div class="col-md-12" >
+			<div class="card" >
+				<div class="card-header" >
+					<h4>Statistique des chiffres d'affaires</h4>
+				</div>
+				<div class="card-body" >
+					<form (ngSubmit)=openCanvas() >
+						<div class="form-group">
+				            <label for="email">Chiffre d'affaire</label>
+				            <select class="form-control col-md-6 pr-1 " [(ngModel)]="option" >
+				                <option>
+				                    Jour
+				                </option>
+				                <option>
+				                    Mois
+				                </option>
+				              </select>
+				          </div>
+						<button class="btn btn-light" >Ouvrir chart</button>
+					</form>					
+					<div class="row" *ngIf="dataAvailable==false" style="color:#fff;" >
+						<div class="col-md-1" ></div>
+					    <div class="stats" style="color: black;" >
+					    	<i class="now-ui-icons loader_refresh spin"></i> Chargement
+					    </div>
+					</div>		
+					<div id="divChart" style="display:none;height:400px;background-color:#28a745;padding: 10px;" >
+						<canvas  baseChart id="bigDashboardChart"
+				                [datasets]="lineBigDashboardChartData"
+				                [labels]="lineBigDashboardChartLabels"
+				                 [colors]="lineBigDashboardChartColors"
+				                [options]="lineBigDashboardChartOptions"
+				                [chartType]="lineBigDashboardChartType"
+				                (chartHover)="chartHovered($event)"
+				                (chartClick)="chartClicked($event)">                	
+				        </canvas>
+					</div> 
+				</div>	
+			</div>
+		</div>
+	</div>	
+	<div class="row" >
+		<div class="col-md-12" >
+			<div class="card" >
+				<div class="card-header" >
+					<h4>Temps de réparations moyennes ces derniers mois</h4>
+				</div>
+				<div class="card-body" >
+					<form (ngSubmit)=openTpsReparations() >
+						<button class="btn btn-light" >Ouvrir chart</button>
+					</form>					
+					<div class="row" *ngIf="dataAvailable==false" style="color:#fff;" >
+						<div class="col-md-1" ></div>
+					    <div class="stats" style="color: black;" >
+					    	<i class="now-ui-icons loader_refresh spin"></i> Chargement
+					    </div>
+					</div>		
+					<div id="divChart2" class="chart-area" style="display:none;" >
+						<canvas  baseChart id="lineChartExampleWithNumbersAndGrid"
+				                [datasets]="lineChartWithNumbersAndGridData"
+		                        [labels]="lineChartWithNumbersAndGridLabels"
+		                        [colors]="lineChartWithNumbersAndGridColors"
+		                        [options]="lineChartWithNumbersAndGridOptions"
+		                        [chartType]="lineChartWithNumbersAndGridType"
+				                (chartHover)="chartHovered($event)"
+				                (chartClick)="chartClicked($event)">                	
+				        </canvas>
+					</div> 
+				</div>	
+			</div>
+		</div>
+	</div>	
 </div>

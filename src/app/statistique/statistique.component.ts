@@ -13,6 +13,7 @@ export class StatistiqueComponent implements OnInit {
   donneesX:any;
   donneesY:any;
   dataAvailable:boolean;
+  option:string;
 
   public lineBigDashboardChartType;
   public gradientStroke;
@@ -74,9 +75,9 @@ export class StatistiqueComponent implements OnInit {
 
   async openCanvas(){
     this.dataAvailable=false;
-    await this.voitureService.depotVoitureJour().subscribe(
+    var opt={option:this.option};
+    await this.voitureService.depotVoitureJour(opt).subscribe(
       (response: any) =>{
-        console.log(response); 
         var keys=[];
         var values=[];
         for(var i=0;i<response.length;i++){
@@ -85,12 +86,9 @@ export class StatistiqueComponent implements OnInit {
         }
         this.donneesY=values;
         this.donneesX=keys;
-        console.log("x="+this.donneesX);
-        console.log("y="+this.donneesY);
         (document.getElementById("divChart")).style.display="block";
         this.dataAvailable=true;
         this.chartColor = "#FFFFFF";
-        console.log(this.dataAvailable);
     this.canvas = document.getElementById("bigDashboardChart");
         console.log("canvas="+document.getElementById("bigDashboardChart"));
     this.ctx = this.canvas.getContext("2d");
@@ -296,5 +294,113 @@ export class StatistiqueComponent implements OnInit {
         console.log(error.message);
     }); 
 
+  }
+
+  openTpsReparations(){
+    this.voitureService.tmpsReparationsMoyens().subscribe(
+      (response: any) =>{
+        var keys=[];
+        var values=[];
+        console.log(response);
+        for(var i=0;i<response.length;i++){
+          keys[i]=response[i]._id;
+          values[i]=response[i].count;
+        }
+        var dataY=values;
+        var dataX=keys;
+        console.log(dataX);
+        console.log(dataY);
+        (document.getElementById("divChart2")).style.display="block";
+        (document.getElementById("divChart2")).style.zIndex='1500';
+        this.canvas = document.getElementById("lineChartExampleWithNumbersAndGrid");
+        this.ctx = this.canvas.getContext("2d");
+
+        this.chartColor = "#FFFFFF";
+
+        this.gradientStroke = this.ctx.createLinearGradient(500, 0, 100, 0);
+        this.gradientStroke.addColorStop(0, '#18ce0f');
+        this.gradientStroke.addColorStop(1, this.chartColor);
+
+        this.gradientFill = this.ctx.createLinearGradient(0, 170, 0, 50);
+        this.gradientFill.addColorStop(0, "rgba(128, 182, 244, 0)");
+        this.gradientFill.addColorStop(1, this.hexToRGB('#18ce0f', 0.4));
+
+        this.gradientChartOptionsConfigurationWithNumbersAndGrid = {
+      maintainAspectRatio: false,
+      legend: {
+        display: false
+      },
+      tooltips: {
+        bodySpacing: 4,
+        mode: "nearest",
+        intersect: 0,
+        position: "nearest",
+        xPadding: 10,
+        yPadding: 10,
+        caretPadding: 10
+      },
+      responsive: true,
+      scales: {
+        yAxes: [{
+          gridLines: {
+            zeroLineColor: "transparent",
+            drawBorder: false
+          },
+          ticks: {
+              stepSize: 500
+          }
+        }],
+        xAxes: [{
+          display: 0,
+          ticks: {
+            display: false
+          },
+          gridLines: {
+            zeroLineColor: "transparent",
+            drawTicks: false,
+            display: false,
+            drawBorder: false
+          }
+        }]
+      },
+      layout: {
+        padding: {
+          left: 0,
+          right: 0,
+          top: 15,
+          bottom: 15
+        }
+      }
+    };
+
+        this.lineChartWithNumbersAndGridData = [
+            {
+              label: "Email Stats",
+               pointBorderWidth: 2,
+               pointHoverRadius: 4,
+               pointHoverBorderWidth: 1,
+               pointRadius: 4,
+               fill: true,
+               borderWidth: 2,
+              data: dataY //[40, 500, 650, 700, 1200, 1250, 1300, 1900]
+            }
+          ];
+          this.lineChartWithNumbersAndGridColors = [
+           {
+             borderColor: "#18ce0f",
+             pointBorderColor: "#FFF",
+             pointBackgroundColor: "#18ce0f",
+             backgroundColor: this.gradientFill
+           }
+         ];
+        this.lineChartWithNumbersAndGridLabels = dataX //["12pm,", "3pm", "6pm", "9pm", "12am", "3am", "6am", "9am"];
+        this.lineChartWithNumbersAndGridOptions = this.gradientChartOptionsConfigurationWithNumbersAndGrid;
+
+        this.lineChartWithNumbersAndGridType = 'line';
+      },
+      (error: HttpErrorResponse) => {
+        console.log(error.message);
+      }
+    );
   }
 }
