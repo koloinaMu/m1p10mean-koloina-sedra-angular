@@ -23,7 +23,8 @@ export const ROUTES: RouteInfo[] = [
 export const routesSuperAdmin: RouteInfo[] = [
     { path: '/utilisateurs', title: 'Utilisateurs',  icon: 'users_single-02', class: '' },
     { path: '/statistique', title: 'Statistique',  icon: 'business_chart-bar-32', class: '' },
-    { path: '/paiement-non-valide', title: 'Paiement non validé',  icon: 'business_money-coins', class: '' }
+    { path: '/paiement-non-valide', title: 'Paiement non validé',  icon: 'business_money-coins', class: '' },
+    { path: '/depense', title: 'Dépense',  icon: 'business_money-coins', class: '' }
     
 ];
 

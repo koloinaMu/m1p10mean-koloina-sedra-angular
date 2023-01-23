@@ -1,0 +1,50 @@
+<div class="panel-header panel-header-sm">
+</div>
+<div class="main-content" >
+  <div class="card col-md-6 form-card"  >
+    <div class="card-header">
+      <h5 class="title">Dépense de ce mois</h5>
+    </div>
+    <div class="card-body">
+      <form (ngSubmit)=depenser() >
+        <div class="row" >
+          <div class="col-md-6 pr-1">
+            <div class="form-group">
+              <label for="email">Salaire</label>
+              <input name="immatriculation" id="email" type="number" class="form-control" [(ngModel)]="salaire" placeholder="Salaire" min="0" >
+            </div>
+          </div>
+        </div>
+        <div class="row" >
+          <div class="col-md-6 pr-1">
+            <div class="form-group">
+              <label for="email">Loyer</label>
+              <input name="loyer" id="email" type="number" class="form-control" [(ngModel)]="loyer" placeholder="Loyer" min="0" >
+            </div>
+          </div>
+        </div>
+        <div class="row" >
+          <div class="col-md-6 pr-1">
+            <div class="form-group">
+              <label for="email">Achat de pièces</label>
+              <input name="immatriculation" id="email" type="number" class="form-control" [(ngModel)]="pieces" placeholder="Pièces" min="0" >
+            </div>
+          </div>
+        </div>
+        <div class="row" >
+          <div class="col-md-6 pr-1">
+            <div class="form-group">
+              <label for="email">Autres</label>
+              <input name="immatriculation" id="email" type="number" class="form-control" [(ngModel)]="autres" placeholder="Autres" min="0" >
+            </div>
+          </div>
+        </div>
+        <div class="row" >
+          <div class="col-md-6 pr-1" >
+            <button type="submit" class="btn btn-light">Dépenser</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

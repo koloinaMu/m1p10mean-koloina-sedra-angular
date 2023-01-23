@@ -13,6 +13,8 @@ export class StatistiqueComponent implements OnInit {
   donneesX:any;
   donneesY:any;
   dataAvailable:boolean;
+  dataAvailable2:boolean;
+  dataAvailable3:boolean;
   option:string;
 
   public lineBigDashboardChartType;
@@ -71,6 +73,8 @@ export class StatistiqueComponent implements OnInit {
 
   ngOnInit() {   
     this.dataAvailable=true;
+    this.dataAvailable2=true;
+    this.dataAvailable3=true;
   }
 
   async openCanvas(){
@@ -103,7 +107,7 @@ export class StatistiqueComponent implements OnInit {
 
     this.lineBigDashboardChartData = [
         {
-          label: "Data",
+          label: "Chiffre d'affaire (Ar) ",
 
           pointBorderWidth: 1,
           pointHoverRadius: 7,
@@ -296,20 +300,21 @@ export class StatistiqueComponent implements OnInit {
 
   }
 
-  openTpsReparations(){
-    this.voitureService.tmpsReparationsMoyens().subscribe(
+  openBenefice(){
+    this.voitureService.beneficeMensuel().subscribe(
       (response: any) =>{
         var keys=[];
         var values=[];
-        console.log(response);
+        //console.log(response);
         for(var i=0;i<response.length;i++){
           keys[i]=response[i]._id;
           values[i]=response[i].count;
         }
         var dataY=values;
         var dataX=keys;
-        console.log(dataX);
-        console.log(dataY);
+        //console.log(dataX);
+        //console.log(dataY);
+        this.dataAvailable2=true;
         (document.getElementById("divChart2")).style.display="block";
         (document.getElementById("divChart2")).style.zIndex='1500';
         this.canvas = document.getElementById("lineChartExampleWithNumbersAndGrid");
@@ -375,7 +380,7 @@ export class StatistiqueComponent implements OnInit {
 
         this.lineChartWithNumbersAndGridData = [
             {
-              label: "Email Stats",
+              label: "Bénéfice mensuel (Ar)",
                pointBorderWidth: 2,
                pointHoverRadius: 4,
                pointHoverBorderWidth: 1,
@@ -403,4 +408,106 @@ export class StatistiqueComponent implements OnInit {
       }
     );
   }
+
+  openTpsReparations(){
+    this.voitureService.tmpsReparationsMoyens().subscribe(
+      (response:any)=>{
+        var keys=[];
+        var values=[];
+        //console.log(response);
+        for(var i=0;i<response.length;i++){
+          keys[i]=response[i]._id;
+          values[i]=response[i].count;
+        }
+        var dataY=values;
+        var dataX=keys;
+        //console.log(dataX);
+        //console.log(dataY);
+        this.dataAvailable3=true;
+        (document.getElementById("divChart3")).style.display="block";
+        this.canvas = document.getElementById("barChartSimpleGradientsNumbers");
+        this.ctx = this.canvas.getContext("2d");
+
+        this.gradientFill = this.ctx.createLinearGradient(0, 170, 0, 50);
+        this.gradientFill.addColorStop(0, "rgba(128, 182, 244, 0)");
+        this.gradientFill.addColorStop(1, this.hexToRGB('#2CA8FF', 0.6));
+
+
+        this.lineChartGradientsNumbersData = [
+            {
+              label: "Temps moyen de réparation (j) ",
+              pointBorderWidth: 2,
+              pointHoverRadius: 4,
+              pointHoverBorderWidth: 1,
+              pointRadius: 4,
+              fill: true,
+              borderWidth: 1,
+              data: dataY //[80, 99, 86, 96, 123, 85, 100, 75, 88, 90, 123, 155]
+            }
+          ];
+        this.lineChartGradientsNumbersColors = [
+         {
+           backgroundColor: this.gradientFill,
+           borderColor: "#2CA8FF",
+           pointBorderColor: "#FFF",
+           pointBackgroundColor: "#2CA8FF",
+         }
+       ];
+        this.lineChartGradientsNumbersLabels = dataX; //["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+        this.lineChartGradientsNumbersOptions = {
+            maintainAspectRatio: false,
+            legend: {
+              display: true
+            },
+            tooltips: {
+              bodySpacing: 4,
+              mode: "nearest",
+              intersect: 0,
+              position: "nearest",
+              xPadding: 10,
+              yPadding: 10,
+              caretPadding: 10
+            },
+            responsive: 1,
+            scales: {
+              yAxes: [{
+                gridLines: {
+                  zeroLineColor: "transparent",
+                  drawBorder: false
+                },
+                ticks: {
+                    stepSize: 20
+                }
+              }],
+              xAxes: [{
+                display: 0,
+                ticks: {
+                  display: false
+                },
+                gridLines: {
+                  zeroLineColor: "transparent",
+                  drawTicks: false,
+                  display: false,
+                  drawBorder: false
+                }
+              }]
+            },
+            layout: {
+              padding: {
+                left: 0,
+                right: 0,
+                top: 15,
+                bottom: 15
+              }
+            }
+          }
+
+        this.lineChartGradientsNumbersType = 'bar';
+      },
+      (error: HttpErrorResponse) => {
+        console.log(error.message);
+      }
+    );
+  }
+
 }

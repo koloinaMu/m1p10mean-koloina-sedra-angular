@@ -53,13 +53,13 @@
 		<div class="col-md-12" >
 			<div class="card" >
 				<div class="card-header" >
-					<h4>Temps de réparations moyennes ces derniers mois</h4>
+					<h4>Bénéfice mensuel</h4>
 				</div>
 				<div class="card-body" >
-					<form (ngSubmit)=openTpsReparations() >
+					<form (ngSubmit)=openBenefice() >
 						<button class="btn btn-light" >Ouvrir chart</button>
 					</form>					
-					<div class="row" *ngIf="dataAvailable==false" style="color:#fff;" >
+					<div class="row" *ngIf="dataAvailable2==false" style="color:#fff;" >
 						<div class="col-md-1" ></div>
 					    <div class="stats" style="color: black;" >
 					    	<i class="now-ui-icons loader_refresh spin"></i> Chargement
@@ -75,6 +75,37 @@
 				                (chartHover)="chartHovered($event)"
 				                (chartClick)="chartClicked($event)">                	
 				        </canvas>
+					</div> 
+				</div>	
+			</div>
+		</div>
+	</div>	
+	<div class="row" >
+		<div class="col-md-12" >
+			<div class="card" >
+				<div class="card-header" >
+					<h4>Temps de réparations moyennes ces derniers mois</h4>
+				</div>
+				<div class="card-body" >
+					<form (ngSubmit)=openTpsReparations() >
+						<button class="btn btn-light" >Ouvrir chart</button>
+					</form>					
+					<div class="row" *ngIf="dataAvailable3==false" style="color:#fff;" >
+						<div class="col-md-1" ></div>
+					    <div class="stats" style="color: black;" >
+					    	<i class="now-ui-icons loader_refresh spin"></i> Chargement
+					    </div>
+					</div>		
+					<div id="divChart3" class="chart-area" style="display:none;" >
+						<canvas baseChart id="barChartSimpleGradientsNumbers"
+                        [datasets]="lineChartGradientsNumbersData"
+                        [labels]="lineChartGradientsNumbersLabels"
+                        [colors]="lineChartGradientsNumbersColors"
+                        [options]="lineChartGradientsNumbersOptions"
+                        [chartType]="lineChartGradientsNumbersType"
+                        (chartHover)="chartHovered($event)"
+                        (chartClick)="chartClicked($event)">                        	
+                       	</canvas>
 					</div> 
 				</div>	
 			</div>

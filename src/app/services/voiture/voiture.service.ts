@@ -53,4 +53,8 @@ export class VoitureService {
   tmpsReparationsMoyens(){
     return this.http.get(baseUrl+'tmpsReparationsMoyens',{responseType:'json'});
   }
+
+  beneficeMensuel(){
+    return this.http.get(baseUrl+'beneficeMensuel',{responseType:'json'});
+  }
 }

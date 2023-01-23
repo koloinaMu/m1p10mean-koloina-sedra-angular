@@ -23,6 +23,7 @@ import { RechercheComponent } from './recherche/recherche.component';
 import { StatistiqueComponent } from './statistique/statistique.component';
 import { MesFacturesComponent } from './mes-factures/mes-factures.component';
 import { PaiementNonValideComponent } from './paiement-non-valide/paiement-non-valide.component';
+import { DepenseComponent } from './depense/depense.component';
 //import { UtilisateurService } from './services/utilisateur/utilisateur.service';
 
 @NgModule({
@@ -49,7 +50,8 @@ import { PaiementNonValideComponent } from './paiement-non-valide/paiement-non-v
     RechercheComponent,
     StatistiqueComponent,
     MesFacturesComponent,
-    PaiementNonValideComponent
+    PaiementNonValideComponent,
+    DepenseComponent
 
   ],
   providers: [
