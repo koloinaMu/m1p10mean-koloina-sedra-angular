@@ -1,3 +1,4 @@
+
 <div class="panel-header panel-header-sm">
 </div>
 <div class="main-content">
@@ -5,7 +6,7 @@
     <div class="col-md-12">
       <div class="card">
         <div class="card-header">
-          <h4 class="card-title"> Liste de mes réparations en cours</h4>
+          <h4 class="card-title"> Liste des vehicules déposés</h4>
         </div>
         <div class="card-body">
           <div class="table-responsive">
@@ -21,12 +22,6 @@
                   Date de dépot
                 </th>
                 <th>
-                  Date de réception
-                </th>
-                <th>
-                  Date de sortie
-                </th>
-                <th>
                   Réparations
                 </th>
               </thead>
@@ -35,9 +30,9 @@
                 	<td> {{ depot.voiture.immatriculation }} </td>
                 	<td> {{ depot.voiture.couleur }} </td>
                 	<td> {{ depot.dateDepot | date:"dd/MM/yyyy HH:mm:ss" }} </td>
-                	<td> {{ depot.dateReception | date:"dd/MM/yyyy HH:mm:ss" }} </td>
-                	<td> {{ depot.dateSortie | date:"dd/MM/yyyy HH:mm:ss" }} </td>
-                	<td>
+
+                  <td>
+
                     <ng-template class="modal" #message let-modal style="z-index: 1055;" >
                       <div id="modalModif" >
   <div class="modal-header">
@@ -53,24 +48,15 @@
                 <th>
                   Nom
                 </th>
-
-                <th class="text-right" >
-                  Prix
-
+                <th>
+                  Prix (Ar)
                 </th>
-
               </thead>
               <tbody>
-                <tr *ngFor="let reparation_prix of prixReparation" >
-                  <td> {{ reparation_prix.nom }} </td>
-                  <td> {{ reparation_prix.prix | number }} </td>
-                  <td class="btn btn-lg btn-outline-primary" (click)="choisir_reparation(depot._id,reparation_prix._id,reparation_prix.nom,reparation_prix.prix )">
-                    <button type="submit">Reparation</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td></td>
-                  <td class="text-right" > {{ montantTotal(depot.reparations) | number }} </td>
+                <tr *ngFor="let data of depot.reparation" >
+                  <td> {{ data.nom }} </td>
+                  <td> {{ data.prix | number }} </td>
+
                 </tr>
               </tbody>
             </table>
@@ -80,8 +66,14 @@
   </div>
   </div>
 </ng-template>
-<button class="btn btn-lg btn-outline-primary" (click)="open(message)">Nos Services</button>
+<button class="btn btn-lg btn-outline-primary" (click)="open(message)">les reparations </button>
+
                   </td>
+
+                  <td>
+                    <button class="btn btn-lg btn-outline-primary" (click)="receptionner(depot._id)">Ajouter au garage</button>
+                  </td>
+
                 </tr>
               </tbody>
             </table>

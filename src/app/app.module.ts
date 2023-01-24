@@ -24,6 +24,10 @@ import { StatistiqueComponent } from './statistique/statistique.component';
 import { MesFacturesComponent } from './mes-factures/mes-factures.component';
 import { PaiementNonValideComponent } from './paiement-non-valide/paiement-non-valide.component';
 import { DepenseComponent } from './depense/depense.component';
+import { ListeFactureComponent } from './liste-facture/liste-facture/liste-facture.component';
+import { ReceptionComponent } from './reception-vehicule/reception/reception.component';
+import { AtelierComponent } from './atelier/atelier.component';
+import { HistoriqueComponent } from './historique/historique.component';
 //import { UtilisateurService } from './services/utilisateur/utilisateur.service';
 
 @NgModule({
@@ -48,10 +52,17 @@ import { DepenseComponent } from './depense/depense.component';
     DepotVoitureComponent,
     ReparationsCourantesComponent,
     RechercheComponent,
+
     StatistiqueComponent,
     MesFacturesComponent,
     PaiementNonValideComponent,
     DepenseComponent
+
+
+    ListeFactureComponent,
+    ReceptionComponent,
+    AtelierComponent,
+    HistoriqueComponent
 
   ],
   providers: [

@@ -31,13 +31,15 @@ export const routesSuperAdmin: RouteInfo[] = [
 export const routesClient: RouteInfo[] = [
     { path: '/depot-voiture', title: 'Déposer ma voiture',  icon: 'shopping_delivery-fast', class: '' },
     { path: '/reparations-courantes', title: 'Mes réparations',  icon: 'ui-2_settings-90', class: '' },
-    { path: '/mes-factures', title: 'Mes factures',  icon: 'business_money-coins', class: '' }
+    { path: '/mes-factures', title: 'Mes factures',  icon: 'business_money-coins', class: '' },
+    { path: '/historique', title: 'Historique',  icon: 'users_single-02', class: '' }
     
 ];
 
 export const routesAtelier: RouteInfo[] = [
-    { path: '/recherche', title: 'Recherche',  icon: 'ui-1_zoom-bold', class: '' }
-    
+    { path: '/recherche', title: 'Recherche',  icon: 'ui-1_zoom-bold', class: '' },
+    { path: '/reception', title: 'Reception Vehicule',  icon: 'ui-2_settings-90', class: '' },
+    { path: '/dans-atelier', title: 'Atelier',  icon: 'ui-2_settings-90', class: '' }
 ];
 
 @Component({
@@ -59,7 +61,7 @@ export class SidebarComponent implements OnInit {
       this.menuItems = routesClient.filter(menuItem => menuItem);
     }else if(type==1){
       this.menuItems = routesSuperAdmin.filter(menuItem => menuItem);
-    }else{
+    }else if(type==2){
       this.menuItems = routesAtelier.filter(menuItem => menuItem);
     }
   }

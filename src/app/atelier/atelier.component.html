@@ -1,3 +1,4 @@
+
 <div class="panel-header panel-header-sm">
 </div>
 <div class="main-content">
@@ -5,12 +6,15 @@
     <div class="col-md-12">
       <div class="card">
         <div class="card-header">
-          <h4 class="card-title"> Liste de mes réparations en cours</h4>
+          <h4 class="card-title"> Liste des vehicules dans le garage</h4>
         </div>
         <div class="card-body">
           <div class="table-responsive">
             <table class="table">
               <thead class=" text-primary">
+                <th>
+                  Utilisateur
+                </th>
                 <th>
                   Immatriculation
                 </th>
@@ -21,27 +25,24 @@
                   Date de dépot
                 </th>
                 <th>
-                  Date de réception
-                </th>
-                <th>
-                  Date de sortie
+                  Date de reception
                 </th>
                 <th>
                   Réparations
                 </th>
               </thead>
               <tbody>
-                <tr *ngFor="let depot of depots" >
+                <tr *ngFor="let depot of voiture" >
+                  <td> {{ depot.utilisateur.nom }} </td>
                 	<td> {{ depot.voiture.immatriculation }} </td>
                 	<td> {{ depot.voiture.couleur }} </td>
                 	<td> {{ depot.dateDepot | date:"dd/MM/yyyy HH:mm:ss" }} </td>
-                	<td> {{ depot.dateReception | date:"dd/MM/yyyy HH:mm:ss" }} </td>
-                	<td> {{ depot.dateSortie | date:"dd/MM/yyyy HH:mm:ss" }} </td>
-                	<td>
+                  <td> {{ depot.dateReception | date:"dd/MM/yyyy HH:mm:ss" }} </td>
+                  <td>
                     <ng-template class="modal" #message let-modal style="z-index: 1055;" >
                       <div id="modalModif" >
   <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">Les réparations</h4>
+    <h4 class="modal-title" id="modal-basic-title">Listes des réparations</h4>
     <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
   </div>
 
@@ -53,25 +54,39 @@
                 <th>
                   Nom
                 </th>
-
-                <th class="text-right" >
-                  Prix
-
+                <th>
+                  Prix (Ar)
                 </th>
-
+                <th>
+                  avancement (%)
+                </th>
+                <th>
+                  definir avancement
+                </th>
               </thead>
               <tbody>
-                <tr *ngFor="let reparation_prix of prixReparation" >
-                  <td> {{ reparation_prix.nom }} </td>
-                  <td> {{ reparation_prix.prix | number }} </td>
-                  <td class="btn btn-lg btn-outline-primary" (click)="choisir_reparation(depot._id,reparation_prix._id,reparation_prix.nom,reparation_prix.prix )">
-                    <button type="submit">Reparation</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td></td>
-                  <td class="text-right" > {{ montantTotal(depot.reparations) | number }} </td>
-                </tr>
+
+
+                      <tr *ngFor="let data of depot.reparation">
+                        <td> {{ data.nom }} </td>
+                        <td> {{ data.prix | number }} </td>
+                        <td> {{ data.avancement | number }} </td>
+                        <td>
+                            <input name="nom" type="text" class="form-control" placeholder="avancement" [(ngModel)]="avancement" >
+                        </td>
+                        <td class="btn btn-sm" (click)="modifier_avancement(avancement,data._id,depot._id)">
+                           <button type="submit">modifier</button>
+                        </td>
+
+
+
+                      </tr>
+
+
+
+
+
+
               </tbody>
             </table>
           </div>
@@ -80,9 +95,11 @@
   </div>
   </div>
 </ng-template>
-<button class="btn btn-lg btn-outline-primary" (click)="open(message)">Nos Services</button>
+<button class="btn btn-lg btn-outline-primary" (click)="open(message)">les reparations</button>
                   </td>
                 </tr>
+
+
               </tbody>
             </table>
           </div>
