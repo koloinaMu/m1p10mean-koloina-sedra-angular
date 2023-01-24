@@ -25,54 +25,19 @@ export class ReparationsCourantesComponent implements OnInit {
     ) { }
 
 
-    public choisir_reparationFromNode(idDepot,idReparation,nom,prix){
-      return this.http.post("http://localhost:3000/ajouterreparationchoisissez/" + idDepot+ "/" + idReparation + "/" + nom + "/" +prix ,{responseType:'json'});
-    }
-
-    public choisir_reparation(idDepot,idReparation,nom,prix){
-      this.choisir_reparationFromNode(idDepot,idReparation,nom,prix).subscribe(
-        (response: any) =>{
-           console.log("REUSSI");
-           alert("reparation inserer")
-           console.log(response);
-         //this.router.navigate(['/utilisateurs']);
-        },
-        (error: HttpErrorResponse) => {
-          console.log(error.message);
-        }
-      )
-    }
-
-    public getReparationPrixFromNode()
-    {
-      return this.http.get("http://localhost:3000/reparation_prix",{responseType:'json'});
-
-    }
 
   ngOnInit(): void {
     this.user=JSON.parse(localStorage.getItem("utilisateur"));
     this.voitureService.getReparationsCourantesUtilisateur(this.user).subscribe(
       (response: any) =>{
 
-       //console.log(response); 
+       console.log(response); 
        this.depots=response; 
       },
       (error: HttpErrorResponse) => {
         console.log(error.message);
       }
     );
-
-    this.getReparationPrixFromNode().subscribe(
-      (result: any) =>{
-       console.log(result);
-       this.prixReparation=result;
-      },
-      (error: HttpErrorResponse) => {
-        console.log(error.message);
-      }
-    );
-
-
   }
 
   open(content) {
@@ -91,6 +56,44 @@ export class ReparationsCourantesComponent implements OnInit {
       }
     }    
     return somme;
+  }
+
+  montantPaye(tableau){
+    var somme=0;
+   if(tableau!=undefined){
+    for(var i=0;i<tableau.length;i++){
+      somme+=(tableau[i].montant);
+    }
+   }    
+    return somme;
+  }
+
+  recuperer_voiture(id,reparations,paiements){
+    var montantTotal=this.montantTotal(reparations);
+    var montantPaye=this.montantPaye(paiements);
+    var result=montantTotal-montantPaye;   
+    var resultReparation=true;
+    for(var i=0;i<reparations.length;i++){
+      if(reparations[i].avancemen<100){
+        resultReparation=false;
+        break;
+      }
+    }
+    var reste=result;
+    if(resultReparation==true && reste==0)
+    {
+      this.voitureService.recuperer_voiture_From_Node(id).subscribe(
+        (response: any) =>{
+           console.log("REUSSI");
+           console.log(response);
+           alert('reparation fini')
+         //this.router.navigate(['/utilisateurs']);
+        },
+        (error: HttpErrorResponse) => {
+          console.log(error.message);
+        }
+      )
+    }     
   }
 
 }

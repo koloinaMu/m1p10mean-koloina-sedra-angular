@@ -77,20 +77,24 @@
                         <td  (click)="modifier_avancement(avancement,data._id,depot._id)">
                            <button class="btn btn-sm" type="submit">modifier</button>
                         </td>
-
-
-
                       </tr>
-
-
-
-
-
-
               </tbody>
             </table>
           </div>
-
+          <div class="" >
+            <h5>Paiements </h5>
+                      <tr>
+                        <td><strong>Montant payé</strong></td>
+                        <td class="text-right" > {{ montantPaye(depot.paiements) | number }} Ar</td>
+                      </tr>
+                  <tr>
+                    <td><strong>Reste à payer</strong></td>
+                    <td class="text-right" > {{ resteAPayer(depot.reparations,depot.paiements) | number }} Ar</td>
+                  </tr>
+          </div>
+          <div id="sortie" style="display:none;" > 
+            <button class="btn btn-lg btn-outline-primary" (click)="sortie(depot._id)" >Sortie</button>
+          </div>
 
   </div>
   </div>

@@ -57,4 +57,22 @@ export class VoitureService {
   beneficeMensuel(){
     return this.http.get(baseUrl+'beneficeMensuel',{responseType:'json'});
   }
+
+  getReparationPrixFromNode()
+  {
+    return this.http.get(baseUrl+"reparation_prix",{responseType:'json'});
+
+  }
+
+  choisir_reparationFromNode(idDepot,idReparation,nom,prix){
+    return this.http.post(baseUrl+"ajouterreparationchoisissez/" + idDepot+ "/" + idReparation + "/" + nom + "/" +prix ,{responseType:'json'});
+  }
+
+  recuperer_voiture_From_Node(id_depot){
+    return this.http.post(baseUrl+"recuperer_voiture/"+id_depot,{responseType:'json'});
+  }
+
+  bonSortie(id_depot){
+    return this.http.post(baseUrl+"bonSortie/"+id_depot,{responseType:'json'});
+  }
 }

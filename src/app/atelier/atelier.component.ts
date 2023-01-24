@@ -4,6 +4,7 @@ import { HttpErrorResponse, HttpHeaders, HttpRequest } from '@angular/common/htt
 import { NgbModalRef , NgbDatepickerModule, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import {HttpClient} from '@angular/common/http';
 import { Router } from '@angular/router';
+import {VoitureService} from '../services/voiture/voiture.service';
 
 @Component({
   selector: 'app-atelier',
@@ -15,12 +16,14 @@ export class AtelierComponent implements OnInit {
   user:any;
   voiture:any;
 
-  constructor(private http: HttpClient, private localStorage:LocalStorageService, private modalService: NgbModal) { }
+  constructor(private http: HttpClient, private localStorage:LocalStorageService,
+  private router:Router, private modalService: NgbModal, 
+  private voitureService:VoitureService) { }
 
   ngOnInit(): void {
     this.listeVoiture_dans_atelier_From_Node().subscribe(
       (response: any) =>{
-       console.log(response);
+      // console.log(response);
        this.voiture=response;
       },
       (error: HttpErrorResponse) => {
@@ -40,7 +43,7 @@ export class AtelierComponent implements OnInit {
   public modifier_avancement(avancement,idReparation,idDepot){
     this.update_avancement_FromNode(avancement,idReparation,idDepot).subscribe(
       (response: any) =>{
-         console.log("REUSSI");
+        // console.log("REUSSI");
          alert("avancement modifie avec succes")
          //console.log(response);
        //this.router.navigate(['/utilisateurs']);
@@ -58,5 +61,55 @@ export class AtelierComponent implements OnInit {
     //modalRef.componentInstance.utilModif.type=type;
   }
 
+  montantTotal(tableau){
+    var somme=0;
+    //console.log(tableau);
+   if(tableau!=undefined){
+    for(var i=0;i<tableau.length;i++){
+      somme+=(tableau[i].prix);
+    }
+   }    
+    return somme;
+  }
+
+  montantPaye(tableau){
+    var somme=0;
+   if(tableau!=undefined){
+    for(var i=0;i<tableau.length;i++){
+      somme+=(tableau[i].montant);
+    }
+   }    
+    return somme;
+  }
+
+  resteAPayer(reparations,paiements){
+    var montantTotal=this.montantTotal(reparations);
+    var montantPaye=this.montantPaye(paiements);
+    var result=montantTotal-montantPaye;   
+    var resultReparation=true;
+    for(var i=0;i<reparations.length;i++){
+      if(reparations[i].avancemen<100){
+        resultReparation=false;
+        break;
+      }
+    }
+    var reste=result;
+    if(resultReparation==true && reste==0)
+    {
+      document.getElementById("sortie").style.display="block";
+    } 
+    return result;
+  }
+
+  sortie(idDepot){
+    console.log(idDepot);
+    this.voitureService.bonSortie(idDepot).subscribe(
+      (response:any)=>{
+        this.router.navigate(['/dans-atelier']);
+      },(error:HttpErrorResponse)=>{
+        console.log(error);
+      }
+    );
+  }
 
 }

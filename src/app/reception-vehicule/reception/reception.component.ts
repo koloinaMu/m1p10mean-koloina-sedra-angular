@@ -15,7 +15,8 @@ export class ReceptionComponent implements OnInit {
   user:any;
   depots:any;
 
-  constructor(private http: HttpClient, private localStorage:LocalStorageService, private modalService: NgbModal) { }
+  constructor(private http: HttpClient,
+    private router: Router, private localStorage:LocalStorageService, private modalService: NgbModal) { }
 
   public receptionnerFromNode(id){
       return this.http.post("http://localhost:3000/receptionner_vehicule/"+id,{responseType:'json'});
@@ -29,7 +30,7 @@ export class ReceptionComponent implements OnInit {
           console.log("REUSSI");
           console.log(response);
           alert('insertion dans le garage  reussi')
-        //this.router.navigate(['/utilisateurs']);
+          this.router.navigate(['/dans-atelier']);
        },
        (error: HttpErrorResponse) => {
          console.log(error.message);
