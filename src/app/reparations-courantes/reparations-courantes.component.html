@@ -64,8 +64,8 @@
                 <tr *ngFor="let reparation_prix of prixReparation" >
                   <td> {{ reparation_prix.nom }} </td>
                   <td> {{ reparation_prix.prix | number }} </td>
-                  <td class="btn btn-lg btn-outline-primary" (click)="choisir_reparation(depot._id,reparation_prix._id,reparation_prix.nom,reparation_prix.prix )">
-                    <button type="submit">Reparation</button>
+                  <td  (click)="choisir_reparation(depot._id,reparation_prix._id,reparation_prix.nom,reparation_prix.prix )">
+                    <button class="btn btn-lg btn-outline-primary" type="submit">Reparation</button>
                   </td>
                 </tr>
                 <tr>

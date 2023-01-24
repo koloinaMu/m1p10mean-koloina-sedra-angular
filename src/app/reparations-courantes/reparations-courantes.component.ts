@@ -85,9 +85,11 @@ export class ReparationsCourantesComponent implements OnInit {
   montantTotal(tableau){
     var somme=0;
    // console.log(tableau);
-    for(var i=0;i<tableau.length;i++){
-      somme+=(tableau[i].prix);
-    }
+    if(tableau!=undefined){
+      for(var i=0;i<tableau.length;i++){
+        somme+=(tableau[i].prix);
+      }
+    }    
     return somme;
   }
 

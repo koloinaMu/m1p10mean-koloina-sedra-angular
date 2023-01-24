@@ -67,15 +67,15 @@
               <tbody>
 
 
-                      <tr *ngFor="let data of depot.reparation">
+                      <tr *ngFor="let data of depot.reparations">
                         <td> {{ data.nom }} </td>
                         <td> {{ data.prix | number }} </td>
                         <td> {{ data.avancement | number }} </td>
                         <td>
-                            <input name="nom" type="text" class="form-control" placeholder="avancement" [(ngModel)]="avancement" >
+                            <input name="nom" type="number" class="form-control"  [(ngModel)]="avancement" [value]="data.avancement" >
                         </td>
-                        <td class="btn btn-sm" (click)="modifier_avancement(avancement,data._id,depot._id)">
-                           <button type="submit">modifier</button>
+                        <td  (click)="modifier_avancement(avancement,data._id,depot._id)">
+                           <button class="btn btn-sm" type="submit">modifier</button>
                         </td>
 
 
