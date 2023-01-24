@@ -30,4 +30,31 @@ export class VoitureService {
     return this.http.post(baseUrl+'sortieVoiture',aPropos,{responseType:'json'});
   }
 
+  depotVoitureJour(option) {
+   // console.log(utilisateur);
+    return this.http.post(baseUrl+'chiffreAffaire',option,{responseType:'json'});
+  }
+
+  paiement(aPropos) {
+   // console.log(utilisateur);
+    return this.http.post(baseUrl+'paiement',aPropos,{responseType:'json'});
+  }
+
+  getDepotNonRegle() {
+   // console.log(utilisateur);
+    return this.http.get(baseUrl+'factures-non-reglees',{responseType:'json'});
+  }
+
+  validerPaiement(aPropos) {
+   // console.log(utilisateur);
+    return this.http.post(baseUrl+'validerPaiement',aPropos,{responseType:'json'});
+  }
+
+  tmpsReparationsMoyens(){
+    return this.http.get(baseUrl+'tmpsReparationsMoyens',{responseType:'json'});
+  }
+
+  beneficeMensuel(){
+    return this.http.get(baseUrl+'beneficeMensuel',{responseType:'json'});
+  }
 }
