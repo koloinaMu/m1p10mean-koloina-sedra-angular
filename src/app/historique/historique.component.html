@@ -29,6 +29,9 @@
                 <th>
                   Réparations
                 </th>
+                <th>
+                  Récuperation
+                </th>
               </thead>
               <tbody>
                 <tr *ngFor="let depot of depots" >
@@ -56,15 +59,15 @@
                 <th>
                   Prix (Ar)
                 </th>
-
+                <th>
+                  avancement (%)
+                </th>
               </thead>
               <tbody>
-                <tr *ngFor="let reparation_prix of prixReparation" >
-                  <td> {{ reparation_prix.nom }} </td>
-                  <td> {{ reparation_prix.prix | number }} </td>
-                  <td class="btn btn-lg btn-outline-primary" (click)="choisir_reparation(depot._id,reparation_prix._id,reparation_prix.nom,reparation_prix.prix )">
-                    <button type="submit">Reparation</button>
-                  </td>
+                <tr *ngFor="let data of depot.reparation">
+                  <td> {{ data.nom }} </td>
+                  <td> {{ data.prix | number }} </td>
+                  <td> {{ data.avancement | number }} </td>
                 </tr>
               </tbody>
             </table>
@@ -74,8 +77,13 @@
   </div>
   </div>
 </ng-template>
-<button class="btn btn-lg btn-outline-primary" (click)="open(message)">Nos Services</button>
+<button class="btn btn-lg btn-outline-primary" (click)="open(message)">Facture</button>
                   </td>
+
+                  <td>
+                    <button class="btn btn-lg btn-outline-primary" (click)="recuperer_voiture(depot._id)">recuperer</button>
+                  </td>
+
                 </tr>
               </tbody>
             </table>
