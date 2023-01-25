@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import {Utilisateur} from '../objets/Utilisateur';
+//import {Utilisateur} from '../objets/Utilisateur';
 import {UtilisateurService} from '../services/utilisateur/utilisateur.service';
 import { HttpErrorResponse, HttpHeaders, HttpRequest } from '@angular/common/http';
 import {LocalStorageService, SessionStorageService} from 'ngx-webstorage';
@@ -14,7 +14,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  utilisateur:Utilisateur={
+  utilisateur={
     id:'',
     nom:'',
     prenom:'',
