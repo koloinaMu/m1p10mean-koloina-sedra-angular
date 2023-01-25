@@ -56,7 +56,7 @@ import { HistoriqueComponent } from './historique/historique.component';
     StatistiqueComponent,
     MesFacturesComponent,
     PaiementNonValideComponent,
-    DepenseComponent
+    DepenseComponent,
 
 
     ListeFactureComponent,

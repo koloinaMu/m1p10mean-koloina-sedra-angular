@@ -29,6 +29,9 @@
                 <th>
                   Réparations
                 </th>
+                <th>
+                  Récupération
+                </th>
               </thead>
               <tbody>
                 <tr *ngFor="let depot of depots" >
@@ -44,43 +47,40 @@
     <h4 class="modal-title" id="modal-basic-title">Les réparations</h4>
     <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
   </div>
-
   <div class="modal-body">
-
     <div class="table-responsive">
             <table class="table">
               <thead class=" text-primary">
                 <th>
                   Nom
                 </th>
-
                 <th class="text-right" >
-                  Prix
-
+                  Prix (Ar)
                 </th>
-
+                <th  >
+                  Avancement (%)
+                </th>
               </thead>
-              <tbody>
-                <tr *ngFor="let reparation_prix of prixReparation" >
-                  <td> {{ reparation_prix.nom }} </td>
-                  <td> {{ reparation_prix.prix | number }} </td>
-                  <td class="btn btn-lg btn-outline-primary" (click)="choisir_reparation(depot._id,reparation_prix._id,reparation_prix.nom,reparation_prix.prix )">
-                    <button type="submit">Reparation</button>
-                  </td>
+              <tbody>               
+                <tr *ngFor="let reparation of depot.reparations" >
+                  <td> {{ reparation.nom }} </td>
+                  <td class="text-right" > {{ reparation.prix | number }} </td>     
+                  <td class="text-right" > {{ reparation.avancement | number }} </td>     
                 </tr>
                 <tr>
-                  <td></td>
-                  <td class="text-right" > {{ montantTotal(depot.reparations) | number }} </td>
+                  <td><strong>Montant total</strong></td>
+                  <td class="text-right" > {{ montantTotal(depot.reparations) | number }} Ar</td>
                 </tr>
               </tbody>
             </table>
           </div>
-
-
   </div>
   </div>
 </ng-template>
-<button class="btn btn-lg btn-outline-primary" (click)="open(message)">Nos Services</button>
+<button class="btn btn-lg btn-outline-primary" (click)="open(message)">Réparations</button>
+                  </td>
+                  <td>
+                    <button class="btn btn-lg btn-outline-primary" (click)="recuperer_voiture(depot._id,depot.reparations,depot.paiements)">recuperer</button>
                   </td>
                 </tr>
               </tbody>

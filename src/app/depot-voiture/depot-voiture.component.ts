@@ -4,6 +4,7 @@ import {Voiture} from '../objets/Voiture';
 import {LocalStorageService, SessionStorageService} from 'ngx-webstorage';
 import { HttpErrorResponse, HttpHeaders, HttpRequest } from '@angular/common/http';
 import {VoitureService} from '../services/voiture/voiture.service';
+import { NgbModalRef , NgbDatepickerModule, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-depot-voiture',
@@ -19,11 +20,14 @@ export class DepotVoitureComponent implements OnInit {
   };
   options:string[];
   user:any;
+  reparations:any[];
+  idDepot:string;
 
   constructor(
     private localStorage:LocalStorageService,
     private voitureService:VoitureService,
-    private router: Router
+    private router: Router,
+    private modalService: NgbModal
   ) { }
 
   ngOnInit(): void {
@@ -36,6 +40,15 @@ export class DepotVoitureComponent implements OnInit {
        'Gris',
        'Blanc'
     ];
+    this.voitureService.getReparationPrixFromNode().subscribe(
+      (response: any) =>{
+       console.log(response);  
+       this.reparations=response;     
+      },
+      (error: HttpErrorResponse) => {
+        console.log(error.message);
+      }
+    );
   }
 
   deposer(){
@@ -43,17 +56,40 @@ export class DepotVoitureComponent implements OnInit {
       utilisateur:this.user,
       voiture:this.voiture
     };
-    console.log(this.voiture.immatriculation+" de couleur "+this.voiture.couleur);
-    console.log(this.user);
+    //console.log(this.voiture.immatriculation+" de couleur "+this.voiture.couleur);
+    //console.log(this.user);
     this.voitureService.deposer(depot).subscribe(
       (response: any) =>{
-       console.log(response);  
-          this.router.navigate(['/reparations-courantes']);      
+       response=(JSON.parse(response)); 
+       this.idDepot=response._id; 
+        alert("Insertion réussie, veuillez sélectionner parmi nos services votre requête");
+          //this.router.navigate(['/reparations-courantes']);      
       },
       (error: HttpErrorResponse) => {
         console.log(error.message);
       }
     );
+  }
+
+  open(content) {
+    this.modalService.open(content,
+      { ariaLabelledBy: 'modal-basic-title',windowClass: 'modif' });
+    //modalRef.componentInstance.utilModif.mail=mail;
+    //modalRef.componentInstance.utilModif.type=type;
+  }
+
+  choisir_reparation(idReparation,nom,prix){
+    this.voitureService.choisir_reparationFromNode(this.idDepot,idReparation,nom,prix).subscribe(
+      (response: any) =>{
+         console.log("REUSSI");
+         alert("reparation inserer")
+         console.log(response);
+       //this.router.navigate(['/utilisateurs']);
+      },
+      (error: HttpErrorResponse) => {
+        console.log(error.message);
+      }
+    )
   }
 
 }

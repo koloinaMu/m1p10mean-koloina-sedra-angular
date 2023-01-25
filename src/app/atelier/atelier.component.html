@@ -67,30 +67,34 @@
               <tbody>
 
 
-                      <tr *ngFor="let data of depot.reparation">
+                      <tr *ngFor="let data of depot.reparations">
                         <td> {{ data.nom }} </td>
                         <td> {{ data.prix | number }} </td>
                         <td> {{ data.avancement | number }} </td>
                         <td>
-                            <input name="nom" type="text" class="form-control" placeholder="avancement" [(ngModel)]="avancement" >
+                            <input name="nom" type="number" class="form-control"  [(ngModel)]="avancement" [value]="data.avancement" >
                         </td>
-                        <td class="btn btn-sm" (click)="modifier_avancement(avancement,data._id,depot._id)">
-                           <button type="submit">modifier</button>
+                        <td  (click)="modifier_avancement(avancement,data._id,depot._id)">
+                           <button class="btn btn-sm" type="submit">modifier</button>
                         </td>
-
-
-
                       </tr>
-
-
-
-
-
-
               </tbody>
             </table>
           </div>
-
+          <div class="" >
+            <h5>Paiements </h5>
+                      <tr>
+                        <td><strong>Montant payé</strong></td>
+                        <td class="text-right" > {{ montantPaye(depot.paiements) | number }} Ar</td>
+                      </tr>
+                  <tr>
+                    <td><strong>Reste à payer</strong></td>
+                    <td class="text-right" > {{ resteAPayer(depot.reparations,depot.paiements) | number }} Ar</td>
+                  </tr>
+          </div>
+          <div id="sortie" style="display:none;" > 
+            <button class="btn btn-lg btn-outline-primary" (click)="sortie(depot._id)" >Sortie</button>
+          </div>
 
   </div>
   </div>

@@ -36,6 +36,7 @@
                 		<ng-template #elseBlock >Responsable atelier</ng-template>                	
                 	<td class="text-right" >                		
 	                	<!-- Modal -->
+	                	<div *ngIf="utilisateur.etat==0" >
 	                	<ng-template class="modal" #message let-modal style="z-index: 1055;" >
 	                		<div id="modalModif" >
 	<div class="modal-header">
@@ -75,7 +76,7 @@
 <button class="btn btn-lg btn-outline-primary" (click)="open(message,utilisateur.mail,utilisateur.type)">Modifier type</button>
 
 
-
+								</div>
                 	</td>
                 </tr>
               </tbody>
