@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Utilisateur} from '../objets/utilisateur';
+//import {Utilisateur} from '../objets/utilisateur';
 import {UtilisateurService} from '../services/utilisateur/utilisateur.service';
 import { HttpErrorResponse, HttpHeaders, HttpRequest } from '@angular/common/http';
 import { Router } from '@angular/router';
@@ -16,7 +16,19 @@ export class InscriptionComponent implements OnInit {
 
   options:string[];
   selectedOption:string;
-  utilisateur:Utilisateur;
+  utilisateur={
+    id: '',
+    nom: '',
+    prenom: '',
+    mail: '',
+    mdp: '',
+    voiture: {
+      id: '',
+      immatriculation: '',
+      couleur: ''
+    },
+    type:0,
+  };
 
   constructor(
     private router: Router,

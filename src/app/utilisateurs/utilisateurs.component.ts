@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {UtilisateurService} from '../services/utilisateur/utilisateur.service';
-import {Utilisateur} from '../objets/Utilisateur';
+//import {Utilisateur} from '../objets/Utilisateur';
 import { HttpErrorResponse, HttpHeaders, HttpRequest } from '@angular/common/http';
 import { NgbModalRef , NgbDatepickerModule, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 })
 export class UtilisateursComponent implements OnInit {
 
-  utilisateurs:Utilisateur[];
+  utilisateurs:any[];
   utilModif={
     mail:"124@gmail.com",
     type:0

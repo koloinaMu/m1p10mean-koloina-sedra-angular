@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import {Voiture} from '../objets/Voiture';
+//import {Voiture} from '../objets/Voiture';
 import {LocalStorageService, SessionStorageService} from 'ngx-webstorage';
 import { HttpErrorResponse, HttpHeaders, HttpRequest } from '@angular/common/http';
 import {VoitureService} from '../services/voiture/voiture.service';
@@ -13,7 +13,7 @@ import { NgbModalRef , NgbDatepickerModule, NgbModal } from '@ng-bootstrap/ng-bo
 })
 export class DepotVoitureComponent implements OnInit {
 
-  voiture:Voiture={
+  voiture={
     id:'',
     immatriculation:'',
     couleur:''
