@@ -1,4 +1,4 @@
-import {Voiture} from './voiture';
+import {Voiture} from './Voiture';
 
 export interface Utilisateur{
 	id: string;
