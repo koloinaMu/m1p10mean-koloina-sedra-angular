@@ -28,6 +28,7 @@ export class LoginComponent implements OnInit {
     type:0
   };
   type:number;
+  localStore:any;
 
   constructor(
     private router: Router,
@@ -42,13 +43,15 @@ export class LoginComponent implements OnInit {
    this.type=Number(this.route.snapshot.paramMap.get('type'));
    //console.log(this.route.snapshot.paramMap.get('type'));
    this.utilisateur.type=this.type;
+   this.localStore=localStorage;
   }
 
   connecter(){
+    this.utilisateur.type=Number(localStorage.getItem('typeUtilisateur'));
     this.utilisateurService.connecter(this.utilisateur).subscribe(
       (response: any) =>{
        // console.log("REUSSI");
-       //console.log(response);
+       console.log(response);
        if(response!='null'){
         var user=JSON.parse(response);
         //console.log(user);
@@ -78,6 +81,13 @@ export class LoginComponent implements OnInit {
   }
 
   navigate(chemin){
+   console.log(this.route.snapshot.paramMap.get('type'));
+    var typp=chemin.split('/')[2];
+    //console.log((this.localStore.getItem('typeUtilisateur')) | number );
+    if(typp!=undefined){
+      localStorage.setItem('typeUtilisateur',typp.toString());
+      //console.log(Number(localStorage.getItem('typeUtilisateur')));
+    }
     this.router.navigate([chemin]);
   }
 

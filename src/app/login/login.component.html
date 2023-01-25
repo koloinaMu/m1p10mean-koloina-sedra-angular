@@ -22,10 +22,10 @@
       </div>
       <div class="row" >
         <div class="col-md-6 pr-1">
-           <div *ngIf="type==1 else elseBlock" >
-            <a (click)="navigate('/connexion/1')" >
+           <div *ngIf="((localStore.getItem('typeUtilisateur')) | number )==1 else elseBlock" >
+            <a (click)="navigate('/connexion/0')" >
               Se connecter en tant qu'utilisateur</a></div>
-            <ng-template #elseBlock><a (click)="navigate('/connexion/0')" >Se connecter en tant que super administrateur</a></ng-template>
+            <ng-template #elseBlock><a (click)="navigate('/connexion/1')" >Se connecter en tant que super administrateur</a></ng-template>
         </div>
         <div class="col-md-6 pr-1">
           <a (click)="navigate('/inscription')" >

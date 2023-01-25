@@ -72,9 +72,9 @@
                         <td> {{ data.prix | number }} </td>
                         <td> {{ data.avancement | number }} </td>
                         <td>
-                            <input name="nom" type="number" class="form-control"  [(ngModel)]="avancement" [value]="data.avancement" >
+                            <input name="nom" type="number" class="form-control"  [(ngModel)]="data.avancement" [value]="data.avancement" >
                         </td>
-                        <td  (click)="modifier_avancement(avancement,data._id,depot._id)">
+                        <td  (click)="modifier_avancement(data.avancement,data._id,depot._id)">
                            <button class="btn btn-sm" type="submit">modifier</button>
                         </td>
                       </tr>

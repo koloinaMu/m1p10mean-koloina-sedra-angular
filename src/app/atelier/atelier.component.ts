@@ -90,7 +90,8 @@ export class AtelierComponent implements OnInit {
     var result=montantTotal-montantPaye;   
     var resultReparation=true;
     for(var i=0;i<reparations.length;i++){
-      if(reparations[i].avancemen<100){
+      //console.log("reparation fait="+reparations[i].avancement);
+      if(reparations[i].avancement<100){
         resultReparation=false;
         break;
       }
@@ -112,6 +113,10 @@ export class AtelierComponent implements OnInit {
         console.log(error);
       }
     );
+  }
+
+  nomModel(idReparation){
+    return 'avancement'+idReparation;
   }
 
 }
