@@ -80,4 +80,8 @@ export class InscriptionComponent implements OnInit {
     ); 
   }
 
+  navigate(chemin){
+    this.router.navigate([chemin]);
+  }
+
 }

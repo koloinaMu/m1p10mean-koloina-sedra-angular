@@ -4,6 +4,7 @@ import { HttpErrorResponse, HttpHeaders, HttpRequest } from '@angular/common/htt
 import { NgbModalRef , NgbDatepickerModule, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import {HttpClient} from '@angular/common/http';
 import { Router } from '@angular/router';
+import { environment } from "../../../environments/environment";
 
 @Component({
   selector: 'app-reception',
@@ -14,12 +15,13 @@ export class ReceptionComponent implements OnInit {
 
   user:any;
   depots:any;
+  private baseUrl=environment.baseUrl;
 
   constructor(private http: HttpClient,
     private router: Router, private localStorage:LocalStorageService, private modalService: NgbModal) { }
 
   public receptionnerFromNode(id){
-      return this.http.post("http://localhost:3000/receptionner_vehicule/"+id,{responseType:'json'});
+      return this.http.post(this.baseUrl+"receptionner_vehicule/"+id,{responseType:'json'});
   }
 
   public receptionner(id){
@@ -42,7 +44,7 @@ export class ReceptionComponent implements OnInit {
 
   public getAllDepotVoitureFromNode() {
     // console.log(utilisateur);
-     return this.http.get("http://localhost:3000/les_depots",{responseType:'json'});
+     return this.http.get(this.baseUrl+"les_depots",{responseType:'json'});
    }
 
   ngOnInit(): void {

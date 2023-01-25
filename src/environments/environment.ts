@@ -4,5 +4,6 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
 export const environment = {
-  production: true
+  production: true,
+  baseUrl:'https://m1p10mean-koloina-sedra-deploy-production.up.railway.app'
 };

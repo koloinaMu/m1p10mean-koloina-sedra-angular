@@ -5,6 +5,7 @@ import { NgbModalRef , NgbDatepickerModule, NgbModal } from '@ng-bootstrap/ng-bo
 import {HttpClient} from '@angular/common/http';
 import { Router } from '@angular/router';
 import {VoitureService} from '../services/voiture/voiture.service';
+import { environment } from "../../environments/environment";
 
 @Component({
   selector: 'app-atelier',
@@ -15,6 +16,7 @@ export class AtelierComponent implements OnInit {
 
   user:any;
   voiture:any;
+  private baseUrl=environment.baseUrl;
 
   constructor(private http: HttpClient, private localStorage:LocalStorageService,
   private router:Router, private modalService: NgbModal, 
@@ -33,11 +35,11 @@ export class AtelierComponent implements OnInit {
   }
 
   public listeVoiture_dans_atelier_From_Node(){
-    return this.http.get("http://localhost:3000/dans_atelier",{responseType:'json'});
+    return this.http.get(this.baseUrl+"dans_atelier",{responseType:'json'});
   }
 
   public update_avancement_FromNode(avancement,idReparation,idDepot){
-    return this.http.post("http://localhost:3000/modifier_avancement/" +avancement +"/"+ idReparation+ "/" + idDepot ,{responseType:'json'});
+    return this.http.post(this.baseUrl+"modifier_avancement/" +avancement +"/"+ idReparation+ "/" + idDepot ,{responseType:'json'});
   }
 
   public modifier_avancement(avancement,idReparation,idDepot){

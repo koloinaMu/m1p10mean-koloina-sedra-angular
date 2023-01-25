@@ -77,4 +77,8 @@ export class LoginComponent implements OnInit {
     ); 
   }
 
+  navigate(chemin){
+    this.router.navigate([chemin]);
+  }
+
 }

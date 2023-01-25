@@ -4,6 +4,7 @@ import { HttpErrorResponse, HttpHeaders, HttpRequest } from '@angular/common/htt
 import {LocalStorageService, SessionStorageService} from 'ngx-webstorage';
 import { data } from 'jquery';
 import { NgbModalRef , NgbDatepickerModule, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { environment } from "../../../environments/environment";
 
 @Component({
   selector: 'app-liste-facture',
@@ -15,6 +16,7 @@ export class ListeFactureComponent implements OnInit {
     public getJsonValue: any;
     user:any;
     depots:any;
+    private baseUrl=environment.baseUrl;
   //apicall= "http://localhost:3000/select_reparation";
 
   /*
@@ -27,7 +29,7 @@ export class ListeFactureComponent implements OnInit {
 
     public getFactureFromNode(mail) {
       // console.log(utilisateur);
-       return this.http.post("http://localhost:3000/facturation",mail,{responseType:'json'});
+       return this.http.post(this.baseUrl+"facturation",mail,{responseType:'json'});
      }
 
     public getListe() {

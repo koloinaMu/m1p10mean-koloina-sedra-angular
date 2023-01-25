@@ -4,6 +4,7 @@ import { HttpErrorResponse, HttpHeaders, HttpRequest } from '@angular/common/htt
 import {VoitureService} from '../services/voiture/voiture.service';
 import {HttpClient} from '@angular/common/http';
 import { NgbModalRef , NgbDatepickerModule, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { environment } from "../../environments/environment";
 
 @Component({
   selector: 'app-historique',
@@ -14,6 +15,7 @@ export class HistoriqueComponent implements OnInit {
 
   user:any;
   depots:any;
+  private baseUrl=environment.baseUrl;
   constructor(
     private localStorage:LocalStorageService,
     private voitureService:VoitureService,
@@ -22,11 +24,11 @@ export class HistoriqueComponent implements OnInit {
   ) { }
 
 public getReparationsCourantesUtilisateur(user){
-  return this.http.post("http://localhost:3000/reparations-courantes",user,{responseType:'json'});
+  return this.http.post(this.baseUrl+"reparations-courantes",user,{responseType:'json'});
 }
 
 public recuperer_voiture_From_Node(id_depot){
-  return this.http.post("http://localhost:3000/recuperer_voiture/"+id_depot,{responseType:'json'});
+  return this.http.post(this.baseUrl+"recuperer_voiture/"+id_depot,{responseType:'json'});
 
 }
 
