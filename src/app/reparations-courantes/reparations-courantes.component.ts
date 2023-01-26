@@ -4,6 +4,9 @@ import { HttpErrorResponse, HttpHeaders, HttpRequest } from '@angular/common/htt
 import {VoitureService} from '../services/voiture/voiture.service';
 import {HttpClient} from '@angular/common/http';
 import { NgbModalRef , NgbDatepickerModule, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
+
 
 
 @Component({
@@ -22,6 +25,8 @@ export class ReparationsCourantesComponent implements OnInit {
     private voitureService:VoitureService,
     private modalService: NgbModal,
     private http: HttpClient,
+    private toastr: ToastrService,
+    private router: Router,
     ) { }
 
 
@@ -86,14 +91,29 @@ export class ReparationsCourantesComponent implements OnInit {
         (response: any) =>{
            console.log("REUSSI");
            console.log(response);
-           alert('reparation fini')
-         //this.router.navigate(['/utilisateurs']);
+           //alert('reparation fini')
+           this.toastr.success('Votre voiture est prête.', '', {
+             timeOut: 8000,
+             closeButton: true,
+             enableHtml: true,
+             toastClass: "alert alert-success alert-with-icon",
+             positionClass: 'toast-bottom-left'
+           });
+          this.router.navigate(['/historique']);
         },
         (error: HttpErrorResponse) => {
           console.log(error.message);
         }
       )
-    }     
+    }else {
+      this.toastr.error('Votre voiture n\'est pas encore prête ou vous n\'avez pas encore payé la totalité de la facture.', '', {
+           timeOut: 8000,
+           enableHtml: true,
+           closeButton: true,
+           toastClass: "alert alert-danger alert-with-icon",
+           positionClass: 'toast-bottom-left'
+         });
+    } 
   }
 
 }

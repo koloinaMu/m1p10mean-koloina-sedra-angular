@@ -5,6 +5,7 @@ import {UtilisateurService} from '../services/utilisateur/utilisateur.service';
 import { HttpErrorResponse, HttpHeaders, HttpRequest } from '@angular/common/http';
 import {LocalStorageService, SessionStorageService} from 'ngx-webstorage';
 import { ActivatedRoute } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -34,7 +35,8 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private utilisateurService:UtilisateurService,
     private localStorage:LocalStorageService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private toastr: ToastrService
     ) { }
 
   ngOnInit(): void {
@@ -62,6 +64,13 @@ export class LoginComponent implements OnInit {
           console.log("type 0");
           //localStorage.setItem('typeUtilisateur',this.type.toString());
           localStorage.setItem('typeUtilisateur',user.type.toString());
+          this.toastr.success('Bienvenue.', '', {
+           timeOut: 8000,
+           closeButton: true,
+           enableHtml: true,
+           toastClass: "alert alert-success alert-with-icon",
+           positionClass: 'toast-bottom-left' 
+         });
           if(user.type==0)
             this.router.navigate(['/depot-voiture']);
           else
@@ -72,6 +81,14 @@ export class LoginComponent implements OnInit {
           this.router.navigate(['/connexion']);
          }
          //this.router.navigate(['/inscription']);
+       }else{
+        this.toastr.error('Erreur d\'authentification! Vérifiez vos identifiants.', '', {
+           timeOut: 8000,
+           enableHtml: true,
+           closeButton: true,
+           toastClass: "alert alert-danger alert-with-icon",
+           positionClass: 'toast-bottom-left'
+         });
        }       
       },
       (error: HttpErrorResponse) => {

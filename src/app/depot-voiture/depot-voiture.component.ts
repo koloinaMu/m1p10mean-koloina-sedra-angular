@@ -5,6 +5,7 @@ import {LocalStorageService, SessionStorageService} from 'ngx-webstorage';
 import { HttpErrorResponse, HttpHeaders, HttpRequest } from '@angular/common/http';
 import {VoitureService} from '../services/voiture/voiture.service';
 import { NgbModalRef , NgbDatepickerModule, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-depot-voiture',
@@ -27,7 +28,8 @@ export class DepotVoitureComponent implements OnInit {
     private localStorage:LocalStorageService,
     private voitureService:VoitureService,
     private router: Router,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private toastr: ToastrService
   ) { }
 
   ngOnInit(): void {
@@ -59,10 +61,28 @@ export class DepotVoitureComponent implements OnInit {
     //console.log(this.voiture.immatriculation+" de couleur "+this.voiture.couleur);
     //console.log(this.user);
     this.voitureService.deposer(depot).subscribe(
-      (response: any) =>{
-       response=(JSON.parse(response)); 
-       this.idDepot=response._id; 
-        alert("Insertion réussie, veuillez sélectionner parmi nos services votre requête");
+      (response: any) =>{ 
+        console.log(response);
+       if(response=='null'){
+        this.toastr.error('Votre voiture est déjà au garage.', '', {
+           timeOut: 8000,
+           enableHtml: true,
+           closeButton: true,
+           toastClass: "alert alert-danger alert-with-icon",
+           positionClass: 'toast-bottom-left' 
+         });
+       }else{
+        response=(JSON.parse(response));
+        this.idDepot=response._id; 
+        this.toastr.success('Veuillez sélectionner les services.', '', {
+           timeOut: 8000,
+           closeButton: true,
+           enableHtml: true,
+           toastClass: "alert alert-success alert-with-icon",
+           positionClass: 'toast-bottom-left' 
+         });
+        //alert("Insertion réussie, veuillez sélectionner parmi nos services votre requête");
+       }       
           //this.router.navigate(['/reparations-courantes']);      
       },
       (error: HttpErrorResponse) => {
@@ -82,8 +102,15 @@ export class DepotVoitureComponent implements OnInit {
     this.voitureService.choisir_reparationFromNode(this.idDepot,idReparation,nom,prix).subscribe(
       (response: any) =>{
          console.log("REUSSI");
-         alert("reparation inserer")
+         //alert("reparation inserer")
          console.log(response);
+         this.toastr.success('Demande reçue.', '', {
+           timeOut: 8000,
+           closeButton: true,
+           enableHtml: true,
+           toastClass: "alert alert-success alert-with-icon",
+           positionClass: 'toast-bottom-left' 
+         });
        //this.router.navigate(['/utilisateurs']);
       },
       (error: HttpErrorResponse) => {

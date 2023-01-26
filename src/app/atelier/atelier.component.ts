@@ -6,6 +6,8 @@ import {HttpClient} from '@angular/common/http';
 import { Router } from '@angular/router';
 import {VoitureService} from '../services/voiture/voiture.service';
 import { environment } from "../../environments/environment";
+import { ToastrService } from 'ngx-toastr';
+
 
 @Component({
   selector: 'app-atelier',
@@ -20,7 +22,7 @@ export class AtelierComponent implements OnInit {
 
   constructor(private http: HttpClient, private localStorage:LocalStorageService,
   private router:Router, private modalService: NgbModal, 
-  private voitureService:VoitureService) { }
+  private voitureService:VoitureService,private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.listeVoiture_dans_atelier_From_Node().subscribe(
@@ -46,7 +48,14 @@ export class AtelierComponent implements OnInit {
     this.update_avancement_FromNode(avancement,idReparation,idDepot).subscribe(
       (response: any) =>{
         // console.log("REUSSI");
-         alert("avancement modifie avec succes")
+         //alert("avancement modifie avec succes")
+         this.toastr.success('Avancement réussi.', '', {
+           timeOut: 8000,
+           closeButton: true,
+           enableHtml: true,
+           toastClass: "alert alert-success alert-with-icon",
+           positionClass: 'toast-bottom-left'
+         });
          //console.log(response);
        //this.router.navigate(['/utilisateurs']);
       },
@@ -108,6 +117,13 @@ export class AtelierComponent implements OnInit {
     console.log(idDepot);
     this.voitureService.bonSortie(idDepot).subscribe(
       (response:any)=>{
+        this.toastr.success('Bon de sortie validé.', '', {
+           timeOut: 8000,
+           closeButton: true,
+           enableHtml: true,
+           toastClass: "alert alert-success alert-with-icon",
+           positionClass: 'toast-bottom-left'
+         });
         this.router.navigate(['/dans-atelier']);
       },(error:HttpErrorResponse)=>{
         console.log(error);

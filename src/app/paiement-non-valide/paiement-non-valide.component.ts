@@ -4,6 +4,7 @@ import { HttpErrorResponse, HttpHeaders, HttpRequest } from '@angular/common/htt
 import {VoitureService} from '../services/voiture/voiture.service';
 import { NgbModalRef , NgbDatepickerModule, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-paiement-non-valide',
@@ -18,7 +19,8 @@ export class PaiementNonValideComponent implements OnInit {
     private router: Router,
     private localStorage:LocalStorageService,
     private voitureService:VoitureService,
-    private modalService: NgbModal) { }
+    private modalService: NgbModal,
+    private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.voitureService.getDepotNonRegle().subscribe(
@@ -59,7 +61,14 @@ export class PaiementNonValideComponent implements OnInit {
     };
     this.voitureService.validerPaiement(paiementt).subscribe(
       (response: any) =>{
-       //console.log(response); 
+       //console.log(response);
+       this.toastr.success('Paiement validé.', '', {
+           timeOut: 8000,
+           closeButton: true,
+           enableHtml: true,
+           toastClass: "alert alert-success alert-with-icon",
+           positionClass: 'toast-bottom-left' 
+         });
        this.router.navigate(['/paiement-non-valide']);
       },
       (error: HttpErrorResponse) => {

@@ -5,6 +5,7 @@ import { NgbModalRef , NgbDatepickerModule, NgbModal } from '@ng-bootstrap/ng-bo
 import {HttpClient} from '@angular/common/http';
 import { Router } from '@angular/router';
 import { environment } from "../../../environments/environment";
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-reception',
@@ -18,7 +19,8 @@ export class ReceptionComponent implements OnInit {
   private baseUrl=environment.baseUrl;
 
   constructor(private http: HttpClient,
-    private router: Router, private localStorage:LocalStorageService, private modalService: NgbModal) { }
+    private router: Router, private localStorage:LocalStorageService, 
+    private modalService: NgbModal,private toastr: ToastrService) { }
 
   public receptionnerFromNode(id){
       return this.http.post(this.baseUrl+"receptionner_vehicule/"+id,{responseType:'json'});
@@ -31,7 +33,14 @@ export class ReceptionComponent implements OnInit {
        (response: any) =>{
           console.log("REUSSI");
           console.log(response);
-          alert('insertion dans le garage  reussi')
+          //alert('insertion dans le garage  reussi')
+          this.toastr.success('Voiture bien reçue.', '', {
+             timeOut: 8000,
+             closeButton: true,
+             enableHtml: true,
+             toastClass: "alert alert-success alert-with-icon",
+             positionClass: 'toast-bottom-left' 
+           });
           this.router.navigate(['/dans-atelier']);
        },
        (error: HttpErrorResponse) => {

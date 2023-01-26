@@ -4,6 +4,7 @@ import { HttpErrorResponse, HttpHeaders, HttpRequest } from '@angular/common/htt
 import {VoitureService} from '../services/voiture/voiture.service';
 import { NgbModalRef , NgbDatepickerModule, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-mes-factures',
@@ -20,7 +21,8 @@ export class MesFacturesComponent implements OnInit {
     private router: Router,
     private localStorage:LocalStorageService,
     private voitureService:VoitureService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private toastr: ToastrService
     ) { }
 
   ngOnInit(): void {
@@ -83,6 +85,13 @@ export class MesFacturesComponent implements OnInit {
     console.log(paiement);
     this.voitureService.paiement(paiement).subscribe(
       (response: any) =>{
+        this.toastr.success('Paiement effectué, en attente de validation.', '', {
+           timeOut: 8000,
+           closeButton: true,
+           enableHtml: true,
+           toastClass: "alert alert-success alert-with-icon",
+           positionClass: 'toast-bottom-left'
+         });
         this.router.navigate(['/mes-factures']);
        //console.log(response); 
       },
