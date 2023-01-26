@@ -78,4 +78,12 @@ export class VoitureService {
   bonSortie(id_depot){
     return this.http.post(this.baseUrl+"bonSortie/"+id_depot,{responseType:'json'});
   }
+
+  voitureClient(utilisateur){
+    return this.http.post(this.baseUrl+"voitureUtilisateur/",utilisateur,{responseType:'json'});
+  }
+
+  historiqueVoiture(voiture){
+    return this.http.post(this.baseUrl+"historiqueVoiture/",voiture,{responseType:'json'});
+  }
 }

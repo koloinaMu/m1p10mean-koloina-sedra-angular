@@ -14,7 +14,9 @@ import { environment } from "../../environments/environment";
 export class HistoriqueComponent implements OnInit {
 
   user:any;
-  depots:any;
+  voitures:any;
+  historiques:any[];
+
   private baseUrl=environment.baseUrl;
   constructor(
     private localStorage:LocalStorageService,
@@ -23,36 +25,15 @@ export class HistoriqueComponent implements OnInit {
     private http: HttpClient,
   ) { }
 
-public getReparationsCourantesUtilisateur(user){
-  return this.http.post(this.baseUrl+"reparations-courantes",user,{responseType:'json'});
-}
-
-public recuperer_voiture_From_Node(id_depot){
-  return this.http.post(this.baseUrl+"recuperer_voiture/"+id_depot,{responseType:'json'});
-
-}
-
-public recuperer_voiture(id){
-  this.recuperer_voiture_From_Node(id).subscribe(
-    (response: any) =>{
-       console.log("REUSSI");
-       console.log(response);
-       alert('reparation fini')
-     //this.router.navigate(['/utilisateurs']);
-    },
-    (error: HttpErrorResponse) => {
-      console.log(error.message);
-    }
-  )
-}
 
   ngOnInit(): void {
 
     this.user=JSON.parse(localStorage.getItem("utilisateur"));
-    this.getReparationsCourantesUtilisateur(this.user).subscribe(
+       console.log(this.user);
+    this.voitureService.voitureClient(this.user).subscribe(
       (response: any) =>{
        console.log(response);
-       this.depots=response;
+       this.voitures=response;
       },
       (error: HttpErrorResponse) => {
         console.log(error.message);
@@ -60,9 +41,19 @@ public recuperer_voiture(id){
     );
   }
 
-  open(content) {
-    this.modalService.open(content,
-      { ariaLabelledBy: 'modal-basic-title',windowClass: 'modif' });
+  open(content,voiture) {
+    console.log(voiture);
+    this.voitureService.historiqueVoiture(voiture).subscribe(
+      (response: any) =>{
+       console.log(response);
+       this.historiques=response;
+       this.modalService.open(content,
+        { ariaLabelledBy: 'modal-basic-title',windowClass: 'modif' });
+      },
+      (error: HttpErrorResponse) => {
+        console.log(error.message);
+      }
+    );    
     //this.getListe();
     //modalRef.componentInstance.utilModif.mail=mail;
     //modalRef.componentInstance.utilModif.type=type;
