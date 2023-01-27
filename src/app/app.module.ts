@@ -23,6 +23,10 @@ import { ListeFactureComponent } from './liste-facture/liste-facture/liste-factu
 import { ReceptionComponent } from './reception-vehicule/reception/reception.component';
 import { AtelierComponent } from './atelier/atelier.component';
 import { HistoriqueComponent } from './historique/historique.component';
+import { DragDropPieceComponent } from './drag-drop-piece/drag-drop-piece.component';
+import { BrowserModule } from '@angular/platform-browser';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+
 //import { UtilisateurService } from './services/utilisateur/utilisateur.service';
 
 @NgModule({
@@ -35,10 +39,12 @@ import { HistoriqueComponent } from './historique/historique.component';
     AppRoutingModule,
     NgbModule,
     NgxWebstorageModule.forRoot(),
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    [BrowserModule, DragDropModule],
   ],
   declarations: [
     AppComponent,
+    [AppComponent],
     AdminLayoutComponent,
     InscriptionComponent,
     LoginComponent,
@@ -49,7 +55,8 @@ import { HistoriqueComponent } from './historique/historique.component';
     ListeFactureComponent,
     ReceptionComponent,
     AtelierComponent,
-    HistoriqueComponent
+    HistoriqueComponent,
+    DragDropPieceComponent
   ],
   providers: [
     //UtilisateurService
