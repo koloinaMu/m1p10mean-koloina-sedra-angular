@@ -5,7 +5,7 @@
     <div class="col-md-12">
       <div class="card">
         <div class="card-header">
-          <h4 class="card-title"> Liste de mes réparations en cours</h4>
+          <h4 class="card-title"> Liste des paiements non validés</h4>
         </div>
         <div class="card-body">
           <div class="table-responsive">
@@ -27,61 +27,60 @@
                   Date de sortie
                 </th>
                 <th>
-                  Réparations
-                </th>
-                <th>
-                  Récupération
+                  Paiements
                 </th>
               </thead>
-              <tbody>
+              <tbody>              	
                 <tr *ngFor="let depot of depots" >
                 	<td> {{ depot.voiture.immatriculation }} </td>
                 	<td> {{ depot.voiture.couleur }} </td>
                 	<td> {{ depot.dateDepot | date:"dd/MM/yyyy HH:mm:ss" }} </td>
                 	<td> {{ depot.dateReception | date:"dd/MM/yyyy HH:mm:ss" }} </td>
                 	<td> {{ depot.dateSortie | date:"dd/MM/yyyy HH:mm:ss" }} </td>
-                	<td>
+                	<td> 
                     <ng-template class="modal" #message let-modal style="z-index: 1055;" >
                       <div id="modalModif" >
   <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">Les réparations</h4>
+    <h4 class="modal-title" id="modal-basic-title">Les paiements</h4>
     <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
   </div>
   <div class="modal-body">
+    
     <div class="table-responsive">
             <table class="table">
               <thead class=" text-primary">
                 <th>
-                  Nom
+                  Date
                 </th>
                 <th class="text-right" >
                   Prix (Ar)
                 </th>
-                <th  >
-                  Avancement (%)
+                <th >
+                  Option
                 </th>
               </thead>
               <tbody>               
-                <tr *ngFor="let reparation of depot.reparations" >
-                  <td> {{ reparation.nom }} </td>
-                  <td class="text-right" > {{ reparation.prix | number }} </td>     
-                  <td class="text-right" > {{ reparation.avancement | number }} </td>     
+                <tr *ngFor="let paiement of depot.paiements" [style.background-color]="paiement.couleur" >
+                  <td> {{ paiement.datePaiement | date:"dd/MM/yyyy HH:mm:ss" }} </td>
+                  <td class="text-right" > {{ paiement.montant | number }} </td>
+                  <td *ngIf="paiement.etat==0" >
+                  	<button class="btn btn-lg btn-outline-primary" (click)="validerPaiement(depot._id,paiement)" >Valider</button>
+                  </td>
                 </tr>
                 <tr>
-                  <td><strong>Montant total</strong></td>
-                  <td class="text-right" > {{ montantTotal(depot.reparations) | number }} Ar</td>
+                  <td><strong>Montant payé</strong></td>
+                  <td class="text-right" > {{ montantPaye(depot.paiements) | number }} Ar</td>
                 </tr>
               </tbody>
             </table>
           </div>
+
+
   </div>
   </div>
 </ng-template>
-<button class="btn btn-lg btn-outline-primary" (click)="open(message)">Réparations</button>
-                  </td>
-                  <td>
-                    <button class="btn btn-lg btn-outline-primary" (click)="recuperer_voiture(depot._id,depot.reparations,depot.paiements)">recuperer</button>
-                  </td>
+<button class="btn btn-lg btn-outline-primary" (click)="open(message)">Paiement</button>
+                  </td>                                	
                 </tr>
               </tbody>
             </table>

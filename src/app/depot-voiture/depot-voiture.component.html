@@ -36,6 +36,48 @@
           </div>
         </div>
       </form>
+
+      <!-- Modal services -->
+      <ng-template class="modal" #message let-modal style="z-index: 1055;" >
+                      <div id="modalModif" >
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Les réparations</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+
+  <div class="modal-body">
+
+    <div class="table-responsive">
+            <table class="table">
+              <thead class=" text-primary">
+                <th>
+                  Nom
+                </th>
+
+                <th class="text-right" >
+                  Prix
+
+                </th>
+
+              </thead>
+              <tbody>
+                <tr *ngFor="let reparation_prix of reparations" >
+                  <td> {{ reparation_prix.nom }} </td>
+                  <td> {{ reparation_prix.prix | number }} </td>
+                  <td  (click)="choisir_reparation(reparation_prix._id,reparation_prix.nom,reparation_prix.prix )">
+                    <button class="btn btn-lg btn-outline-primary" type="submit">Reparation</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+
+  </div>
+  </div>
+</ng-template>
+<button class="btn btn-lg btn-outline-primary" (click)="open(message)">Nos Services</button>
+
     </div>
   </div>
 </div>

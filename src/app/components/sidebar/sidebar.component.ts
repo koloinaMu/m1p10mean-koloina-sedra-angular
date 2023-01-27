@@ -21,17 +21,22 @@ export const ROUTES: RouteInfo[] = [
 ];
 
 export const routesSuperAdmin: RouteInfo[] = [
-    { path: '/utilisateurs', title: 'Utilisateurs',  icon: 'users_single-02', class: '' }
-
+    { path: '/utilisateurs', title: 'Utilisateurs',  icon: 'users_single-02', class: '' },
+    { path: '/statistique', title: 'Statistique',  icon: 'business_chart-bar-32', class: '' },
+    { path: '/paiement-non-valide', title: 'Paiement non validé',  icon: 'business_money-coins', class: '' },
+    { path: '/depense', title: 'Dépense',  icon: 'business_money-coins', class: '' }
+    
 ];
 
 export const routesClient: RouteInfo[] = [
-    { path: '/depot-voiture', title: 'Déposer ma voiture',  icon: 'ui-2_settings-90', class: '' },
+    { path: '/depot-voiture', title: 'Déposer ma voiture',  icon: 'shopping_delivery-fast', class: '' },
     { path: '/reparations-courantes', title: 'Mes réparations',  icon: 'ui-2_settings-90', class: '' },
-    { path: '/reception', title: 'Reception Vehicule',  icon: 'ui-2_settings-90', class: '' },
-    { path: '/dans-atelier', title: 'Atelier',  icon: 'ui-2_settings-90', class: '' },
-    { path: '/historique', title: 'Historique',  icon: 'users_single-02', class: '' },
-    { path: '/piece', title: 'piece',  icon: 'users_single-02', class: '' }
+
+    { path: '/piece', title: 'piece',  icon: 'users_single-02', class: '' },
+
+    { path: '/mes-factures', title: 'Mes factures',  icon: 'business_money-coins', class: '' },
+    { path: '/historique', title: 'Historique',  icon: 'users_single-02', class: '' }
+    
 ];
 
 export const routesAtelier: RouteInfo[] = [

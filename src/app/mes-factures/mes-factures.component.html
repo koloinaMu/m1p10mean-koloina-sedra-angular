@@ -5,7 +5,7 @@
     <div class="col-md-12">
       <div class="card">
         <div class="card-header">
-          <h4 class="card-title"> Liste de mes réparations en cours</h4>
+          <h4 class="card-title"> Liste de mes factures</h4>
         </div>
         <div class="card-body">
           <div class="table-responsive">
@@ -27,20 +27,17 @@
                   Date de sortie
                 </th>
                 <th>
-                  Réparations
-                </th>
-                <th>
-                  Récupération
+                  Facture
                 </th>
               </thead>
-              <tbody>
+              <tbody>              	
                 <tr *ngFor="let depot of depots" >
                 	<td> {{ depot.voiture.immatriculation }} </td>
                 	<td> {{ depot.voiture.couleur }} </td>
                 	<td> {{ depot.dateDepot | date:"dd/MM/yyyy HH:mm:ss" }} </td>
                 	<td> {{ depot.dateReception | date:"dd/MM/yyyy HH:mm:ss" }} </td>
                 	<td> {{ depot.dateSortie | date:"dd/MM/yyyy HH:mm:ss" }} </td>
-                	<td>
+                	<td> 
                     <ng-template class="modal" #message let-modal style="z-index: 1055;" >
                       <div id="modalModif" >
   <div class="modal-header">
@@ -57,15 +54,11 @@
                 <th class="text-right" >
                   Prix (Ar)
                 </th>
-                <th  >
-                  Avancement (%)
-                </th>
               </thead>
               <tbody>               
                 <tr *ngFor="let reparation of depot.reparations" >
                   <td> {{ reparation.nom }} </td>
                   <td class="text-right" > {{ reparation.prix | number }} </td>     
-                  <td class="text-right" > {{ reparation.avancement | number }} </td>     
                 </tr>
                 <tr>
                   <td><strong>Montant total</strong></td>
@@ -74,14 +67,57 @@
               </tbody>
             </table>
           </div>
+    <div class="" >
+    	<h5>Paiements </h5>
+            <table class="table">
+              <thead class=" text-primary">
+                <th>
+                  Date
+                </th>
+                <th class="text-right" >
+                  Prix (Ar)
+                </th>
+              </thead>
+              <tbody>               
+                <tr *ngFor="let paiement of depot.paiements" [style.background-color]="paiement.couleur" >
+                  <td> {{ paiement.datePaiement | date:"dd/MM/yyyy HH:mm:ss" }} </td>
+                  <td class="text-right" > {{ paiement.montant | number }} </td>
+                </tr>
+                <tr>
+                  <td><strong>Montant payé</strong></td>
+                  <td class="text-right" > {{ montantPaye(depot.paiements) | number }} Ar</td>
+                </tr>
+              </tbody>
+            </table>
+            <tr>
+              <td><strong>Reste à payer</strong></td>
+              <td class="text-right" > {{ resteAPayer(depot.reparations,depot.paiements) | number }} Ar</td>
+            </tr>
+    </div>
+    <div id="fichePaiement" style="display:none;" >
+    	<h5>Fiche de paiement</h5>
+    	<form (ngSubmit)=payer(depot._id) >
+        <div class="row" >
+          <div class="col-md-6 pr-1">
+            <div class="form-group">
+              <label for="email">Montant (Ar)</label>
+              <input name="montant" id="email" type="number" class="form-control" [(ngModel)]="montant" >
+            </div>
+          </div>
+        </div>
+        <div class="row" >
+          <div class="col-md-6 pr-1" >
+            <button type="submit" class="btn btn-light">Payer</button>
+          </div>
+        </div>
+      </form>
+    </div>
+
   </div>
   </div>
 </ng-template>
-<button class="btn btn-lg btn-outline-primary" (click)="open(message)">Réparations</button>
-                  </td>
-                  <td>
-                    <button class="btn btn-lg btn-outline-primary" (click)="recuperer_voiture(depot._id,depot.reparations,depot.paiements)">recuperer</button>
-                  </td>
+<button class="btn btn-lg btn-outline-primary" (click)="open(message)">Facture</button>
+                  </td>                                	
                 </tr>
               </tbody>
             </table>

@@ -48,6 +48,9 @@
             <table class="table">
               <thead class=" text-primary">
                 <th>
+                  Utilisateur
+                </th>
+                <th>
                   Immatriculation
                 </th>
                 <th>
@@ -65,52 +68,88 @@
                 <th>
                   Réparations
                 </th>
-                <th>
-                  Options
-                </th>
               </thead>
-              <tbody>              	
+              <tbody>
                 <tr *ngFor="let depot of depots" >
-                	<td> {{ depot.voiture.immatriculation }} </td>
-                	<td> {{ depot.voiture.couleur }} </td>
-                	<td> {{ depot.dateDepot }} </td>
-                	<td> {{ depot.dateReception }} </td>
-                	<td> {{ depot.dateSortie }} </td>
-                  <td> {{ depot.reparations }} </td>                                  
-                	<td> 
-                    <div *ngIf="type==2 && depot.dateSortie==null" >
+                  <td> {{ depot.utilisateur.nom }} </td>
+                  <td> {{ depot.voiture.immatriculation }} </td>
+                  <td> {{ depot.voiture.couleur }} </td>
+                  <td> {{ depot.dateDepot | date:"dd/MM/yyyy HH:mm:ss" }} </td>
+                  <td> {{ depot.dateReception | date:"dd/MM/yyyy HH:mm:ss" }} </td>
+                  <td> {{ depot.dateSortie | date:"dd/MM/yyyy HH:mm:ss" }} </td>
+                  <td>
                     <ng-template class="modal" #message let-modal style="z-index: 1055;" >
                       <div id="modalModif" >
   <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">Valider bon de sortie</h4>
+    <h4 class="modal-title" id="modal-basic-title">Listes des réparations</h4>
     <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
   </div>
+
   <div class="modal-body">
-    <form>
-      <div class="row" >
-            <div class="col-md-6 pr-1">
-              <div class="form-group">
-                <label for="email">Voiture : </label>
-                <label> {{ depot.voiture.immatriculation }} </label>
-              </div>
-            </div>
-        </div>
-        <div class="row" >
-            <div class="col-md-6 pr-1">
-              <div class="form-group">
-                <button type="button" class="btn btn-outline-dark" (click)="sortie(depot)">Valider sortie</button>
-              </div>
-            </div>
-        </div>
-    </form>
+
+    <div class="table-responsive">
+            <table class="table">
+              <thead class=" text-primary">
+                <th>
+                  Nom
+                </th>
+                <th>
+                  Prix (Ar)
+                </th>
+                <th>
+                  Avancement (%)
+                </th>
+                <div *ngIf="depot.dateReception!=undefined && depot.dateSortie==undefined" >
+                  <th>
+                    Définir avancement
+                  </th>
+                </div>                
+              </thead>
+              <tbody>
+
+
+                      <tr *ngFor="let data of depot.reparations">
+                        <td> {{ data.nom }} </td>
+                        <td> {{ data.prix | number }} </td>
+                        <td> {{ data.avancement | number }} </td>
+                        <div *ngIf="depot.dateReception!=undefined && depot.dateSortie==undefined" >
+                          <td>
+                              <input name="nom" type="number" class="form-control"  [(ngModel)]="data.avancement" [value]="data.avancement" >
+                          </td>
+                          <td  (click)="modifier_avancement(data.avancement,data._id,depot._id)">
+                             <button class="btn btn-sm" type="submit">Modifier</button>
+                          </td>
+                        </div>
+                      </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="" >
+            <h5>Paiements </h5>
+                      <tr>
+                        <td><strong>Montant payé</strong></td>
+                        <td class="text-right" > {{ montantPaye(depot.paiements) | number }} Ar</td>
+                      </tr>
+                  <tr>
+                    <td><strong>Reste à payer</strong></td>
+                    <td class="text-right" > {{ resteAPayer(depot) | number }} Ar</td>
+                  </tr>
+          </div>
+          <div  id="sortie" style="display:none;" > 
+            <button class="btn btn-lg btn-outline-primary" (click)="sortie(depot._id)" >Sortie</button>
+          </div>
+
   </div>
   </div>
 </ng-template>
-<button class="btn btn-lg btn-outline-primary" (click)="open(message)">Sortie</button>
-
-                  </div>
-                  </td>                                	
+<button class="btn btn-lg btn-outline-primary" (click)="open(message)">Réparations</button>
+                  </td>
+                  <td *ngIf="depot.dateReception==undefined" >
+                    <button class="btn btn-lg btn-outline-primary" (click)="receptionner(depot._id)">Ajouter au garage</button>
+                  </td>
                 </tr>
+
+
               </tbody>
             </table>
           </div>

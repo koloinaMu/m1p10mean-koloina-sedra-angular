@@ -12,7 +12,7 @@ import {AuthentificationGuard} from './authentification/authentification.guard';
 const routes: Routes =[
   {
     path: '',
-    redirectTo: 'dashboard',
+    redirectTo: 'connexion/0',
     pathMatch: 'full',
   }, {
     path: 'inscription',

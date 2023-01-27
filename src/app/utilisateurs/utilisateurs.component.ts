@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {UtilisateurService} from '../services/utilisateur/utilisateur.service';
-import {Utilisateur} from '../objets/Utilisateur';
+//import {Utilisateur} from '../objets/Utilisateur';
 import { HttpErrorResponse, HttpHeaders, HttpRequest } from '@angular/common/http';
 import { NgbModalRef , NgbDatepickerModule, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-utilisateurs',
@@ -12,7 +13,7 @@ import { Router } from '@angular/router';
 })
 export class UtilisateursComponent implements OnInit {
 
-  utilisateurs:Utilisateur[];
+  utilisateurs:any[];
   utilModif={
     mail:"124@gmail.com",
     type:0
@@ -22,7 +23,8 @@ export class UtilisateursComponent implements OnInit {
   constructor(
     private router: Router,
     private utilisateurService:UtilisateurService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private toastr: ToastrService
     ) { }
 
   ngOnInit(): void {
@@ -57,6 +59,13 @@ export class UtilisateursComponent implements OnInit {
       (response: any) =>{
        // console.log("REUSSI");
       // console.log(response);
+        this.toastr.success('Inscription validée. Mail envoyé.', '', {
+           timeOut: 8000,
+           closeButton: true,
+           enableHtml: true,
+           toastClass: "alert alert-success alert-with-icon",
+           positionClass: 'toast-bottom-left'
+         })
        this.router.navigate(['/utilisateurs']);      
       },
       (error: HttpErrorResponse) => {

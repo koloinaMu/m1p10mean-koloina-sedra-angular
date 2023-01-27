@@ -5,7 +5,7 @@
     <div class="col-md-12">
       <div class="card">
         <div class="card-header">
-          <h4 class="card-title"> Liste de mes réparations en cours</h4>
+          <h4 class="card-title"> Historique de réparations de mes voitures</h4>
         </div>
         <div class="card-body">
           <div class="table-responsive">
@@ -18,28 +18,13 @@
                   Couleur
                 </th>
                 <th>
-                  Date de dépot
-                </th>
-                <th>
-                  Date de réception
-                </th>
-                <th>
-                  Date de sortie
-                </th>
-                <th>
-                  Réparations
-                </th>
-                <th>
-                  Récuperation
+                  Historique
                 </th>
               </thead>
               <tbody>
-                <tr *ngFor="let depot of depots" >
-                	<td> {{ depot.voiture.immatriculation }} </td>
-                	<td> {{ depot.voiture.couleur }} </td>
-                	<td> {{ depot.dateDepot | date:"dd/MM/yyyy HH:mm:ss" }} </td>
-                	<td> {{ depot.dateReception | date:"dd/MM/yyyy HH:mm:ss" }} </td>
-                	<td> {{ depot.dateSortie | date:"dd/MM/yyyy HH:mm:ss" }} </td>
+                <tr *ngFor="let voiture of voitures" >
+                	<td> {{ voiture._id.immatriculation }} </td>
+                	<td> {{ voiture._id.couleur }} </td>
                 	<td>
                     <ng-template class="modal" #message let-modal style="z-index: 1055;" >
                       <div id="modalModif" >
@@ -54,20 +39,24 @@
             <table class="table">
               <thead class=" text-primary">
                 <th>
-                  Nom
+                  Date
+                </th>
+                <th>
+                  Réparation 
                 </th>
                 <th>
                   Prix (Ar)
                 </th>
                 <th>
-                  avancement (%)
+                  Avancement (%)
                 </th>
               </thead>
               <tbody>
-                <tr *ngFor="let data of depot.reparation">
-                  <td> {{ data.nom }} </td>
-                  <td> {{ data.prix | number }} </td>
-                  <td> {{ data.avancement | number }} </td>
+                <tr *ngFor="let historique of historiques">
+                  <td> {{ historique.dateDepot | date:"dd/MM/yyyy HH:mm:ss" }} </td>
+                  <td> {{ historique.reparation.nom  }} </td>
+                  <td> {{ historique.reparation.prix  }} </td>
+                  <td> {{ historique.reparation.avancement  }} </td>
                 </tr>
               </tbody>
             </table>
@@ -77,12 +66,10 @@
   </div>
   </div>
 </ng-template>
-<button class="btn btn-lg btn-outline-primary" (click)="open(message)">Facture</button>
+<button class="btn btn-lg btn-outline-primary" (click)="open(message,voiture._id)">Réparations</button>
                   </td>
 
-                  <td>
-                    <button class="btn btn-lg btn-outline-primary" (click)="recuperer_voiture(depot._id)">recuperer</button>
-                  </td>
+                  
 
                 </tr>
               </tbody>
