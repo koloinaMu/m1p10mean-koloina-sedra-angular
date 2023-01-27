@@ -20,6 +20,7 @@ import { ListeFactureComponent } from '../../liste-facture/liste-facture/liste-f
 import { ReceptionComponent } from '../../reception-vehicule/reception/reception.component';
 import { AtelierComponent } from '../../atelier/atelier.component';
 import { HistoriqueComponent } from '../../historique/historique.component';
+import { DragDropPieceComponent } from '../../drag-drop-piece/drag-drop-piece.component';
 
 export const AdminLayoutRoutes: Routes = [
     { path: 'utilisateurs',      component: UtilisateursComponent },
@@ -42,5 +43,6 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'reception',        component: ReceptionComponent },
     { path: 'dans-atelier',        component: AtelierComponent },
     { path: 'historique',        component: HistoriqueComponent },
+    { path: 'piece',        component: DragDropPieceComponent },
 
 ];

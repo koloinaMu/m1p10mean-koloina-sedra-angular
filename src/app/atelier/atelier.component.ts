@@ -68,6 +68,8 @@ export class AtelierComponent implements OnInit {
   open(content) {
     this.modalService.open(content,
       { ariaLabelledBy: 'modal-basic-title',windowClass: 'modif' });
+
+
     //modalRef.componentInstance.utilModif.mail=mail;
     //modalRef.componentInstance.utilModif.type=type;
   }

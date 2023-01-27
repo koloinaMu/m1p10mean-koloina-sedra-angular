@@ -1,0 +1,80 @@
+
+<div class="panel-header panel-header-sm">
+</div>
+<div class="main-content">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="card-title"> Liste des vehicules dans le garage</h4>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table">
+              <thead class=" text-primary">
+                <th>
+                  Utilisateur
+                </th>
+                <th>
+                  Immatriculation
+                </th>
+                <th>
+                  Couleur
+                </th>
+                <th>
+                  Date de dépot
+                </th>
+                <th>
+                  Date de reception
+                </th>
+                <th>
+                  Réparations
+                </th>
+
+              </thead>
+              <tbody>
+                <tr *ngFor="let depot of voiture" >
+                  <td> {{ depot.utilisateur.nom }} </td>
+                	<td> {{ depot.voiture.immatriculation }} </td>
+                	<td> {{ depot.voiture.couleur }} </td>
+                	<td> {{ depot.dateDepot | date:"dd/MM/yyyy HH:mm:ss" }} </td>
+                  <td> {{ depot.dateReception | date:"dd/MM/yyyy HH:mm:ss" }} </td>
+                  <td>
+                    <ng-template class="modal" #message let-modal style="z-index: 1055;" >
+                      <div id="modalModif" >
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Listes des pieces à acheter</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+
+  <div class="modal-body">
+
+    <div class="example-boundary">
+
+            <div class="example-box"   cdkDragBoundary=".example-boundary"    *ngFor="let lespieces of piece"  (cdkDragEnded)="ajouterPiece(lespieces._id,lespieces.nom,lespieces.prix,depot._id,$event)" cdkDrag> {{ lespieces.nom }} </div>
+            <div class="cutCorners-sub ">drop here</div>
+    </div>
+
+
+
+    <script></script>
+
+
+  </div>
+  </div>
+</ng-template>
+<button class="btn btn-lg btn-outline-primary" (click)="open(message)">les pieces </button>
+
+</td>
+
+                </tr>
+
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

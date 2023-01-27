@@ -30,6 +30,7 @@
                 <th>
                   Réparations
                 </th>
+
               </thead>
               <tbody>
                 <tr *ngFor="let depot of voiture" >
@@ -77,6 +78,7 @@
                         <td  (click)="modifier_avancement(data.avancement,data._id,depot._id)">
                            <button class="btn btn-sm" type="submit">modifier</button>
                         </td>
+
                       </tr>
               </tbody>
             </table>
