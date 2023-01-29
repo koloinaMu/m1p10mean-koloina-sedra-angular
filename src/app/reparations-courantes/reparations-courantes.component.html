@@ -67,9 +67,13 @@
                   <td class="text-right" > {{ reparation.prix | number }} </td>     
                   <td class="text-right" > {{ reparation.avancement | number }} </td>     
                 </tr>
+                <tr *ngFor="let reparation of depot.piece" >
+                  <td> {{ reparation.nom }} </td>
+                  <td class="text-right" > {{ reparation.prix | number }} </td>          
+                </tr>
                 <tr>
                   <td><strong>Montant total</strong></td>
-                  <td class="text-right" > {{ montantTotal(depot.reparations) | number }} Ar</td>
+                  <td class="text-right" > {{ montantTotal(depot.reparations,depot.piece) | number }} Ar</td>
                 </tr>
               </tbody>
             </table>
@@ -80,7 +84,7 @@
 <button class="btn btn-lg btn-outline-primary" (click)="open(message)">Réparations</button>
                   </td>
                   <td>
-                    <button class="btn btn-lg btn-outline-primary" (click)="recuperer_voiture(depot._id,depot.reparations,depot.paiements)">recuperer</button>
+                    <button class="btn btn-lg btn-outline-primary" (click)="recuperer_voiture(depot._id,depot.reparations,depot.piece,depot.paiements)">recuperer</button>
                   </td>
                 </tr>
               </tbody>

@@ -60,9 +60,13 @@
                   <td> {{ reparation.nom }} </td>
                   <td class="text-right" > {{ reparation.prix | number }} </td>     
                 </tr>
+                <tr *ngFor="let reparation of depot.piece" >
+                  <td> {{ reparation.nom }} </td>
+                  <td class="text-right" > {{ reparation.prix | number }} </td>     
+                </tr>
                 <tr>
                   <td><strong>Montant total</strong></td>
-                  <td class="text-right" > {{ montantTotal(depot.reparations) | number }} Ar</td>
+                  <td class="text-right" > {{ montantTotal(depot.reparations,depot.piece) | number }} Ar</td>
                 </tr>
               </tbody>
             </table>
@@ -91,7 +95,7 @@
             </table>
             <tr>
               <td><strong>Reste à payer</strong></td>
-              <td class="text-right" > {{ resteAPayer(depot.reparations,depot.paiements) | number }} Ar</td>
+              <td class="text-right" > {{ resteAPayer(depot.reparations,depot.piece,depot.paiements) | number }} Ar</td>
             </tr>
     </div>
     <div id="fichePaiement" style="display:none;" >

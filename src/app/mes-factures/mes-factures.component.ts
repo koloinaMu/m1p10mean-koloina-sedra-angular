@@ -45,12 +45,17 @@ export class MesFacturesComponent implements OnInit {
     //modalRef.componentInstance.utilModif.type=type;
   }
 
-  montantTotal(tableau){
+  montantTotal(tableau,piece){
     var somme=0;
     //console.log(tableau);
    if(tableau!=undefined){
     for(var i=0;i<tableau.length;i++){
       somme+=(tableau[i].prix);
+    }
+   } 
+   if(piece!=undefined){
+    for(var i=0;i<piece.length;i++){
+      somme+=(piece[i].prix);
     }
    }    
     return somme;
@@ -67,8 +72,8 @@ export class MesFacturesComponent implements OnInit {
     return somme;
   }
 
-  resteAPayer(reparations,paiements){
-    var montantTotal=this.montantTotal(reparations);
+  resteAPayer(reparations,piece,paiements){
+    var montantTotal=this.montantTotal(reparations,piece);
     var montantPaye=this.montantPaye(paiements);
     var result=montantTotal-montantPaye;
     if(result>0){

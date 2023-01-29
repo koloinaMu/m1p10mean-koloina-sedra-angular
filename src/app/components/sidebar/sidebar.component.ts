@@ -31,9 +31,6 @@ export const routesSuperAdmin: RouteInfo[] = [
 export const routesClient: RouteInfo[] = [
     { path: '/depot-voiture', title: 'Déposer ma voiture',  icon: 'shopping_delivery-fast', class: '' },
     { path: '/reparations-courantes', title: 'Mes réparations',  icon: 'ui-2_settings-90', class: '' },
-
-    { path: '/piece', title: 'piece',  icon: 'users_single-02', class: '' },
-
     { path: '/mes-factures', title: 'Mes factures',  icon: 'business_money-coins', class: '' },
     { path: '/historique', title: 'Historique',  icon: 'users_single-02', class: '' }
     

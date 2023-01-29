@@ -125,6 +125,23 @@
             </table>
           </div>
           <div class="" >
+            <h5>Pièces nécessaires </h5>
+            <div class="table-responsive">
+            <table class="table">
+              <thead class=" text-primary">
+                <th> Nom</th>
+                <th>Prix (Ar)</th>
+              </thead>
+              <tbody>
+                <tr *ngFor="let data of depot.piece">
+                  <td> {{ data.nom }} </td>
+                  <td> {{ data.prix | number }} </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          </div>
+          <div class="" >
             <h5>Paiements </h5>
                       <tr>
                         <td><strong>Montant payé</strong></td>
@@ -147,6 +164,35 @@
                   <td *ngIf="depot.dateReception==undefined" >
                     <button class="btn btn-lg btn-outline-primary" (click)="receptionner(depot._id)">Ajouter au garage</button>
                   </td>
+                  <td>
+                    <ng-template class="modal" #pieces let-modal style="z-index: 1055;" >
+                      <div id="modalModif" >
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Listes des pieces à acheter</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+
+  <div class="modal-body">
+    <p>Glissez les pièces utiles dans la boite verte</p>
+
+    <div class="example-boundary row">
+      <div class="pieces col-md-6" >
+         <div class="example-box"   cdkDragBoundary=".example-boundary"    *ngFor="let lespieces of piece"  (cdkDragEnded)="ajouterPiece(lespieces._id,lespieces.nom,lespieces.prix,depot._id,$event)" cdkDrag> {{ lespieces.nom }} </div>
+      </div>           
+            <div class="cutCorners-sub col-md-6">Glissez ici</div>
+    </div>
+
+
+
+    <script></script>
+
+
+  </div>
+  </div>
+</ng-template>
+<button class="btn btn-lg btn-outline-primary" (click)="open(pieces)">Les pièces </button>
+
+</td>
                 </tr>
 
 

@@ -6,6 +6,7 @@ import { NgbModalRef , NgbDatepickerModule, NgbModal } from '@ng-bootstrap/ng-bo
 import { Router } from '@angular/router';
 import { environment } from "../../environments/environment";
 import { ToastrService } from 'ngx-toastr';
+import { CdkDrag, CdkDragDrop, moveItemInArray,CdkDragEnd } from '@angular/cdk/drag-drop';
 
 
 @Component({
@@ -22,6 +23,7 @@ export class RechercheComponent implements OnInit {
   options:string[];
   depots:any[];
   type:number;
+  piece:any;
   private baseUrl=environment.baseUrl;
 
   constructor(
@@ -41,6 +43,15 @@ export class RechercheComponent implements OnInit {
        'Blanc'
     ];
     this.type=(Number)(localStorage.getItem("typeUtilisateur"));
+    this.get_piece_From_Node().subscribe(
+      (response: any) =>{
+       console.log(response);
+       this.piece=response;
+      },
+      (error: HttpErrorResponse) => {
+        console.log(error.message);
+      }
+    );
    // console.log(this.type);
   }
 
@@ -88,12 +99,17 @@ export class RechercheComponent implements OnInit {
     )
   }
 
-  montantTotal(tableau){
+  montantTotal(tableau,piece){
     var somme=0;
     //console.log(tableau);
    if(tableau!=undefined){
     for(var i=0;i<tableau.length;i++){
       somme+=(tableau[i].prix);
+    }
+   }
+   if(piece!=undefined){
+    for(var i=0;i<piece.length;i++){
+      somme+=(piece[i].prix);
     }
    }    
     return somme;
@@ -112,10 +128,11 @@ export class RechercheComponent implements OnInit {
   resteAPayer(depot){
     console.log(depot);
     var reparations=depot.reparations;
+    var pieces=depot.piece;
     var paiements=depot.paiements;
     var reception=depot.dateReception;
     var sortie=depot.dateSortie;
-    var montantTotal=this.montantTotal(reparations);
+    var montantTotal=this.montantTotal(reparations,pieces);
     var montantPaye=this.montantPaye(paiements);
     var result=montantTotal-montantPaye;   
     var resultReparation=true;
@@ -182,5 +199,63 @@ export class RechercheComponent implements OnInit {
        }
      )
    }
+
+   public get_piece_From_Node(){
+    return this.http.get(this.baseUrl+"les_pieces",{responseType:'json'});
+  }
+
+  public ajouter_Piece_From_Node(id_piece,nom,prix,id_depot){
+    return this.http.post(this.baseUrl+"ajouter_pieces/" + id_piece+ "/" + nom + "/" + prix + "/" +id_depot ,{responseType:'json'});
+  }
+
+  public ajouterPiece(id_piece,nom,prix,id_depot,e: CdkDragEnd){
+
+    var positionX =  e.source.getFreeDragPosition().x;
+    var positionY =  e.source.getFreeDragPosition().y;
+    console.log(e);
+    //var clh = (window.innerHeight || document.documentElement.clientHeight) ;
+    //var x=e.x / window.innerWidth * 50 +"%";
+    //console.log("zany ary n position X : "+ clw);
+    //console.log("zany ary n position Y : "+ clh);
+    positionX=e.dropPoint.x;
+    positionY=e.dropPoint.y;
+    var nbPiece=this.piece.length;
+    if(nbPiece==undefined){
+      nbPiece=0;
+    }
+    //if(positionX===348)
+    if(positionX>=715 && positionY>=158){
+      //console.log("okey place="+positionX+" et "+positionY);
+      this.ajouter_Piece_From_Node(id_piece,nom,prix,id_depot).subscribe(
+        (response: any) =>{
+         //alert("piece ajouté avec reussite")
+         this.toastr.success('Pièce ajoutée au panier.', '', {
+           timeOut: 8000,
+           closeButton: true,
+           enableHtml: true,
+           toastClass: "alert alert-success alert-with-icon",
+           positionClass: 'toast-bottom-left' 
+         });
+          //console.log(response);
+         //this.piece=response;
+        },
+        (error: HttpErrorResponse) => {
+          console.log(error.message);
+        }
+      );
+    }
+
+ }
+
+   dragEnded($event: CdkDragEnd) {
+    const { offsetLeft, offsetTop } = $event.source.element.nativeElement;
+    const { x, y } = $event.distance;
+    var positionX =  $event.source.getFreeDragPosition().x;
+    var positionY =  $event.source.getFreeDragPosition().y;
+    //this.showPopup = true;
+    console.log(positionX);
+    return {positionX, positionY}
+
+  }
 
 }
