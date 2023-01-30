@@ -69,7 +69,7 @@ export class PaiementNonValideComponent implements OnInit {
            toastClass: "alert alert-success alert-with-icon",
            positionClass: 'toast-bottom-left' 
          });
-       this.router.navigate(['/paiement-non-valide']);
+       this.router.navigate(['/app/paiement-non-valide']);
       },
       (error: HttpErrorResponse) => {
         console.log(error.message);

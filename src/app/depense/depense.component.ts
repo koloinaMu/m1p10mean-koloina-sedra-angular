@@ -35,7 +35,7 @@ export class DepenseComponent implements OnInit {
     this.depenseService.depenser(depenses).subscribe(
       (response: any) =>{
        console.log(response);  
-          this.router.navigate(['/depense']);      
+          this.router.navigate(['/app/depense']);      
       },
       (error: HttpErrorResponse) => {
         console.log(error.message);

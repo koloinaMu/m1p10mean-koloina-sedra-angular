@@ -72,15 +72,15 @@ export class LoginComponent implements OnInit {
            positionClass: 'toast-bottom-left' 
          });
           if(user.type==0)
-            this.router.navigate(['/depot-voiture']);
+            this.router.navigate(['/app/depot-voiture']);
           else
-            this.router.navigate(['/recherche']);            
+            this.router.navigate(['/app/recherche']);            
          }else if(this.type==1){
-          this.router.navigate(['/utilisateurs']);
+          this.router.navigate(['/app/utilisateurs']);
          }else{
-          this.router.navigate(['/connexion']);
+          this.router.navigate(['/app/connexion']);
          }
-         //this.router.navigate(['/inscription']);
+         //this.router.navigate(['/app/inscription']);
        }else{
         this.toastr.error('Erreur d\'authentification! Vérifiez vos identifiants.', '', {
            timeOut: 8000,
@@ -99,7 +99,7 @@ export class LoginComponent implements OnInit {
 
   navigate(chemin){
    console.log(this.route.snapshot.paramMap.get('type'));
-    var typp=chemin.split('/')[2];
+    var typp=chemin.split('/')[3];
     //console.log((this.localStore.getItem('typeUtilisateur')) | number );
     if(typp!=undefined){
       localStorage.setItem('typeUtilisateur',typp.toString());

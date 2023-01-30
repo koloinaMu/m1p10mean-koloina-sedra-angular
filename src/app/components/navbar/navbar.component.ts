@@ -153,7 +153,7 @@ export class NavbarComponent implements OnInit {
       }
       titlee = titlee.split('/').pop();
       //console.log(titlee);
-      var part1=titlee.charAt(0).toUpperCase();
+      var part1=titlee.charAt(1).toUpperCase();
       var part2=titlee.slice(1);
       titlee=part1+part2;
 
@@ -169,10 +169,10 @@ export class NavbarComponent implements OnInit {
       console.log("dexonnexion");
       localStorage.removeItem("utilisateur");
       localStorage.removeItem("typeUtilisateur");
-      this.router.navigate(['/connexion']);
+      this.router.navigate(['/app/connexion']);
     }
 
     rechercher(){
-      this.router.navigate(['/recherche']);
+      this.router.navigate(['/app/recherche']);
     }
 }

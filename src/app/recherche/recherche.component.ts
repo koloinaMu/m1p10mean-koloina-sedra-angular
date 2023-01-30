@@ -91,7 +91,7 @@ export class RechercheComponent implements OnInit {
            positionClass: 'toast-bottom-left'
          });
          //console.log(response);
-       //this.router.navigate(['/utilisateurs']);
+       //this.router.navigate(['/app/utilisateurs']);
       },
       (error: HttpErrorResponse) => {
         console.log(error.message);
@@ -162,7 +162,7 @@ export class RechercheComponent implements OnInit {
            toastClass: "alert alert-success alert-with-icon",
            positionClass: 'toast-bottom-left'
          });
-        this.router.navigate(['/dans-atelier']);
+        this.router.navigate(['/app/dans-atelier']);
       },(error:HttpErrorResponse)=>{
         console.log(error);
       }
@@ -192,7 +192,7 @@ export class RechercheComponent implements OnInit {
              toastClass: "alert alert-success alert-with-icon",
              positionClass: 'toast-bottom-left' 
            });
-          this.router.navigate(['/dans-atelier']);
+          this.router.navigate(['/app/dans-atelier']);
        },
        (error: HttpErrorResponse) => {
          console.log(error.message);

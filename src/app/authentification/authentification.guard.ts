@@ -36,7 +36,7 @@ export class AuthentificationGuard implements CanActivate {
       }else if(type==2 && routesAtelier.includes(url)){
         return true;
       }else{
-        this.router.navigate(['/connexion']);
+        this.router.navigate(['/app/connexion']);
         return false;
       }
     }

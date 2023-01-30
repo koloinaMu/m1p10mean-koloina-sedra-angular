@@ -41,7 +41,7 @@ export class ReceptionComponent implements OnInit {
              toastClass: "alert alert-success alert-with-icon",
              positionClass: 'toast-bottom-left' 
            });
-          this.router.navigate(['/dans-atelier']);
+          this.router.navigate(['/app/dans-atelier']);
        },
        (error: HttpErrorResponse) => {
          console.log(error.message);

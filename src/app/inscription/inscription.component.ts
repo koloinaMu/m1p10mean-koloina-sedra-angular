@@ -81,7 +81,7 @@ export class InscriptionComponent implements OnInit {
            toastClass: "alert alert-info alert-with-icon",
            positionClass: 'toast-bottom-left'
          });
-       this.router.navigate(['/connexion/0']);
+       this.router.navigate(['/app/connexion/0']);
       },
       (error: HttpErrorResponse) => {
         console.log(error);

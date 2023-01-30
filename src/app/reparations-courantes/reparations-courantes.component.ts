@@ -104,7 +104,7 @@ export class ReparationsCourantesComponent implements OnInit {
              toastClass: "alert alert-success alert-with-icon",
              positionClass: 'toast-bottom-left'
            });
-          this.router.navigate(['/historique']);
+          this.router.navigate(['/app/historique']);
         },
         (error: HttpErrorResponse) => {
           console.log(error.message);

@@ -97,7 +97,7 @@ export class MesFacturesComponent implements OnInit {
            toastClass: "alert alert-success alert-with-icon",
            positionClass: 'toast-bottom-left'
          });
-        this.router.navigate(['/mes-factures']);
+        this.router.navigate(['/app/mes-factures']);
        //console.log(response); 
       },
       (error: HttpErrorResponse) => {
