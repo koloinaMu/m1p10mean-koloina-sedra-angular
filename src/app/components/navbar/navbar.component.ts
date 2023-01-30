@@ -169,10 +169,10 @@ export class NavbarComponent implements OnInit {
       console.log("dexonnexion");
       localStorage.removeItem("utilisateur");
       localStorage.removeItem("typeUtilisateur");
-      this.router.navigate(['/app/connexion']);
+      this.router.navigate(['/connexion']);
     }
 
     rechercher(){
-      this.router.navigate(['/app/recherche']);
+      this.router.navigate(['/recherche']);
     }
 }

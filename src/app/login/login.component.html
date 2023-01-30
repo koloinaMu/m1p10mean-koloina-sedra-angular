@@ -8,7 +8,7 @@
         <div class="col-md-6 pr-1">
           <div class="form-group">
             <label for="email">Email</label>
-            <input name="email" id="email" type="email" class="form-control" [(ngModel)]="utilisateur.mail" placeholder="Email">
+            <input name="email" id="email" type="email" class="form-control" [(ngModel)]="utilisateur.mail" >
           </div>
         </div>
       </div>
@@ -16,19 +16,33 @@
         <div class="col-md-6 pr-1">
           <div class="form-group">
             <label for="email">Mot de passe</label>
-            <input name="mdp" id="email" type="password" class="form-control" [(ngModel)]="utilisateur.mdp" placeholder="Mot de passe">
+            <input name="mdp" id="email" type="password" class="form-control" [(ngModel)]="utilisateur.mdp" >
           </div>
         </div>
       </div>
       <div class="row" >
         <div class="col-md-6 pr-1">
-           <div *ngIf="((localStore.getItem('typeUtilisateur')) | number )==1 else elseBlock" >
-            <a (click)="navigate('/app/connexion/0')" >
-              Se connecter en tant qu'utilisateur</a></div>
-            <ng-template #elseBlock><a (click)="navigate('/app/connexion/1')" >Se connecter en tant que super administrateur</a></ng-template>
+           <div *ngIf="((localStore.getItem('typeUtilisateur')) | number )==1 " >
+            <a (click)="navigate('/connexion/0')" >
+              Se connecter en tant que client</a><br>
+              <a (click)="navigate('/connexion/2')" >
+              Se connecter en tant qu'atelier</a>
+            </div>
+            <div *ngIf="((localStore.getItem('typeUtilisateur')) | number )==0 " >
+            <a (click)="navigate('/connexion/1')" >
+              Se connecter en tant que super administrateur</a><br>
+              <a (click)="navigate('/connexion/2')" >
+              Se connecter en tant qu'atelier</a>
+            </div>
+            <div *ngIf="((localStore.getItem('typeUtilisateur')) | number )==2 " >
+            <a (click)="navigate('/connexion/1')" >
+              Se connecter en tant que super administrateur</a><br>
+              <a (click)="navigate('/connexion/0')" >
+              Se connecter en tant que client</a>
+            </div>
         </div>
         <div class="col-md-6 pr-1">
-          <a (click)="navigate('/app/inscription')" >
+          <a (click)="navigate('/inscription')" >
             S'inscrire
           </a>          
         </div>

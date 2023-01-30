@@ -42,10 +42,24 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
    // console.log("UTILISATEUR");
    // console.log(typeof this.utilisateur);
+   this.localStore=localStorage;
    this.type=Number(this.route.snapshot.paramMap.get('type'));
+   localStorage.setItem('typeUtilisateur',this.type.toString());
    //console.log(this.route.snapshot.paramMap.get('type'));
    this.utilisateur.type=this.type;
-   this.localStore=localStorage;
+   console.log(this.type);
+   if(this.utilisateur.type==0){
+    this.utilisateur.mail='rabenjako@gmail.com';
+    this.utilisateur.mdp='koloina';
+   }else if(this.utilisateur.type==1){
+    this.utilisateur.mail='superAdmin@gmail.com';
+    this.utilisateur.mdp='superAdmin';
+   }else if(this.utilisateur.type==2){
+    var nb=0;
+   //localStorage.setItem('typeUtilisateur',nb.toString());
+    this.utilisateur.mail='atelier@gmail.com';
+    this.utilisateur.mdp='atelier';
+   }
   }
 
   connecter(){
@@ -53,14 +67,15 @@ export class LoginComponent implements OnInit {
     this.utilisateurService.connecter(this.utilisateur).subscribe(
       (response: any) =>{
        // console.log("REUSSI");
-       console.log(response);
+       //console.log(response);
        if(response!='null'){
         var user=JSON.parse(response);
         //console.log(user);
          this.utilisateur.mdp='';
          localStorage.setItem('utilisateur', (response));
          localStorage.setItem('typeUtilisateur',this.type.toString());
-         if(this.type==0){
+         console.log("type local="+this.type);
+         if(this.type==0 || this.type==1 || this.type==2){
           console.log("type 0");
           //localStorage.setItem('typeUtilisateur',this.type.toString());
           localStorage.setItem('typeUtilisateur',user.type.toString());
@@ -71,17 +86,17 @@ export class LoginComponent implements OnInit {
            toastClass: "alert alert-success alert-with-icon",
            positionClass: 'toast-bottom-left' 
          });
-          if(user.type==0)
-            this.router.navigate(['/app/depot-voiture']);
-          else
-            this.router.navigate(['/app/recherche']);            
-         }else if(this.type==1){
-          this.router.navigate(['/app/utilisateurs']);
-         }else{
-          this.router.navigate(['/app/connexion']);
-         }
-         //this.router.navigate(['/app/inscription']);
-       }else{
+
+    //console.log(user.type==2);
+          if(user.type==0){
+            this.router.navigate(['/depot-voiture']);
+          }
+          else if(user.type==2){
+            this.router.navigate(['/recherche']);            
+          }
+         else if(user.type==1){
+          this.router.navigate(['/utilisateurs']);
+         }}else{
         this.toastr.error('Erreur d\'authentification! Vérifiez vos identifiants.', '', {
            timeOut: 8000,
            enableHtml: true,
@@ -89,8 +104,8 @@ export class LoginComponent implements OnInit {
            toastClass: "alert alert-danger alert-with-icon",
            positionClass: 'toast-bottom-left'
          });
-       }       
-      },
+        }
+       }},
       (error: HttpErrorResponse) => {
         console.log(error.message);
       }
@@ -98,13 +113,28 @@ export class LoginComponent implements OnInit {
   }
 
   navigate(chemin){
-   console.log(this.route.snapshot.paramMap.get('type'));
-    var typp=chemin.split('/')[3];
+   //console.log(this.route.snapshot.paramMap.get('type'));
+    var typp=chemin.split('/')[2];
+    //console.log(chemin.split('/'));
     //console.log((this.localStore.getItem('typeUtilisateur')) | number );
     if(typp!=undefined){
       localStorage.setItem('typeUtilisateur',typp.toString());
       //console.log(Number(localStorage.getItem('typeUtilisateur')));
+      typp=Number(typp);
+      if(typp==0){
+        this.utilisateur.mail='rabenjako@gmail.com';
+        this.utilisateur.mdp='koloina';
+       }else if(typp==1){
+        this.utilisateur.mail='superAdmin@gmail.com';
+        this.utilisateur.mdp='superAdmin';
+       }else if(typp==2){
+        var nb=0;
+       //localStorage.setItem('typeUtilisateur',nb.toString());
+        this.utilisateur.mail='atelier@gmail.com';
+        this.utilisateur.mdp='atelier';
+       }
     }
+    //console.log(chemin);
     this.router.navigate([chemin]);
   }
 

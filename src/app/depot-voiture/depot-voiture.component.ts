@@ -83,7 +83,7 @@ export class DepotVoitureComponent implements OnInit {
          });
         //alert("Insertion réussie, veuillez sélectionner parmi nos services votre requête");
        }       
-          //this.router.navigate(['/app/reparations-courantes']);      
+          //this.router.navigate(['/reparations-courantes']);      
       },
       (error: HttpErrorResponse) => {
         console.log(error.message);
@@ -111,7 +111,7 @@ export class DepotVoitureComponent implements OnInit {
            toastClass: "alert alert-success alert-with-icon",
            positionClass: 'toast-bottom-left' 
          });
-       //this.router.navigate(['/app/utilisateurs']);
+       //this.router.navigate(['/utilisateurs']);
       },
       (error: HttpErrorResponse) => {
         console.log(error.message);

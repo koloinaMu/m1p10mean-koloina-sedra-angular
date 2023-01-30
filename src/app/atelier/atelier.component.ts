@@ -144,7 +144,7 @@ export class AtelierComponent implements OnInit {
            toastClass: "alert alert-success alert-with-icon",
            positionClass: 'toast-bottom-left'
          });
-        this.router.navigate(['/app/dans-atelier']);
+        this.router.navigate(['/dans-atelier']);
       },(error:HttpErrorResponse)=>{
         console.log(error);
       }

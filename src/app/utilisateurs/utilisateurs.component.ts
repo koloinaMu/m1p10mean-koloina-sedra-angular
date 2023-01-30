@@ -66,7 +66,7 @@ export class UtilisateursComponent implements OnInit {
            toastClass: "alert alert-success alert-with-icon",
            positionClass: 'toast-bottom-left'
          })
-       this.router.navigate(['/app/utilisateurs']);      
+       this.router.navigate(['/utilisateurs']);      
       },
       (error: HttpErrorResponse) => {
         console.log(error.message);

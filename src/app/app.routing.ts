@@ -12,24 +12,24 @@ import {AuthentificationGuard} from './authentification/authentification.guard';
 const routes: Routes =[
   {
     path: '',
-    redirectTo: 'app/connexion/0',
+    redirectTo: 'connexion/0',
     pathMatch: 'full',
   }, {
-    path: 'app/inscription',
+    path: 'inscription',
     component: InscriptionComponent,
     pathMatch: 'full',
   },
   {
-    path: 'app/connexion',
-    redirectTo: 'app/connexion/0',
+    path: 'connexion',
+    redirectTo: 'connexion/0',
     pathMatch: 'full',
   },
   {
-    path: 'app/connexion/:type',
+    path: 'connexion/:type',
     component: LoginComponent,
     pathMatch: 'full',
   }, {
-    path: 'app/',
+    path: '',
     component: AdminLayoutComponent,
     canActivate: [AuthentificationGuard],
     children: [
